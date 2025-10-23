@@ -11,15 +11,15 @@ st.set_page_config(
     layout="wide",
 )
 
-# -------------------- THEME COLORS --------------------
-PRIMARY = "#004aad"   # main blue
-HOVER = "#0066cc"     # hover blue (softer)
-ACCENT = "#cfe8ff"    # light blue accents
-BG = "#f7faff"        # page background
+# -------------------- COLORS --------------------
+PRIMARY = "#004aad"
+HOVER = "#005fcc"
+ACCENT = "#e8f1ff"
+BG = "#f9fbff"
+TEXT = "#1f2a44"
 
-# -------------------- HELPERS --------------------
+# -------------------- LOTTIE HELPERS --------------------
 def load_lottie(url: str):
-    """Load a Lottie animation from a URL (returns parsed json or None)."""
     try:
         r = requests.get(url, timeout=6)
         if r.status_code == 200:
@@ -28,14 +28,12 @@ def load_lottie(url: str):
         return None
     return None
 
-# NLP/ML Lottie (placeholder — feel free to replace with another Lottie JSON URL)
-nlp_lottie_url = "https://assets9.lottiefiles.com/packages/lf20_jtbfg2nb.json"
+nlp_lottie_url = "https://lottie.host/f3a325cf-9441-4df9-b22b-52ac0b9bb8a3/tBbTgoUQ8r.json"  # NLP/ML themed animation
+contact_lottie_url = "https://lottie.host/8b67e0d4-fdd3-479b-9f2d-fec8d1af7fc4/nfE4vO1y4g.json"
 nlp_anim = load_lottie(nlp_lottie_url)
-
-contact_lottie_url = "https://assets9.lottiefiles.com/packages/lf20_t24tpvcu.json"
 contact_anim = load_lottie(contact_lottie_url)
 
-# -------------------- STYLES (CSS) --------------------
+# -------------------- STYLES --------------------
 st.markdown(
     f"""
 <style>
@@ -44,98 +42,98 @@ st.markdown(
   --hover: {HOVER};
   --accent: {ACCENT};
   --bg: {BG};
+  --text: {TEXT};
 }}
 
-html, body, [class*="stApp"], .main {{
+html, body, [class*="stApp"] {{
   background-color: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
 }}
 
-/* Headings */
-h1, h2, h3, h4 {{
+h1, h2, h3 {{
+  color: var(--primary);
+  font-weight: 700;
+}}
+
+hr {{
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  margin: 25px 0;
+}}
+
+/* Sidebar */
+[data-testid="stSidebar"] {{
+  background: white;
+  border-right: 1px solid rgba(0,0,0,0.05);
+  padding-top: 18px;
+}}
+
+[data-testid="stSidebar"] label {{
+  padding: 8px 10px;
+  display: block;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}}
+
+[data-testid="stSidebar"] label:hover {{
+  background-color: rgba(0,74,173,0.07);
   color: var(--primary);
 }}
 
-/* Make placeholder profile image circular */
-.profile-img {{
-  border-radius: 50%;
-  border: 5px solid rgba(0,0,0,0.04);
+[data-testid="stSidebar"] input[type="radio"]:checked + label {{
+  background-color: rgba(0,74,173,0.10);
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0,74,173,0.15);
 }}
 
-/* Buttons */
-.stButton>button, .st-download-button>button {{
-  background-color: var(--primary) !important;
-  color: white !important;
-  border-radius: 10px !important;
-  padding: 8px 14px !important;
-  transition: background-color 0.18s ease, transform 0.08s ease;
+[data-testid="stSidebar"] input[type="radio"] {{
+  accent-color: var(--primary);
 }}
-.stButton>button:hover, .st-download-button>button:hover {{
-  background-color: var(--hover) !important;
+
+.stButton>button {{
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}}
+.stButton>button:hover {{
+  background-color: var(--hover);
   transform: translateY(-2px);
 }}
 
-/* Sidebar container look */
-[data-testid="stSidebar"] {{
-  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-  border-right: 1px solid rgba(0,0,0,0.04);
-  padding-top: 16px;
-}}
-
-/* Radio / sidebar items styling: make them blue and nicer */
-[data-testid="stSidebar"] input[type="radio"] {{
-  accent-color: var(--primary); /* modern browsers */
-}}
-/* Label hover effect in sidebar */
-[data-testid="stSidebar"] label {{
-  display: block;
-  padding: 8px 10px;
-  border-radius: 8px;
-  transition: background-color 0.15s ease, color 0.15s ease, transform 0.06s ease;
-  cursor: pointer;
-  color: #0b2540;
-}}
-[data-testid="stSidebar"] label:hover {{
-  background-color: rgba(0, 74, 173, 0.06);
-  color: var(--primary);
-  transform: translateX(4px);
-}}
-/* Active/checked label */
-[data-testid="stSidebar"] input[type="radio"]:checked + label {{
-  background-color: rgba(0, 74, 173, 0.10);
-  color: var(--primary);
-  font-weight: 600;
-  box-shadow: 0 4px 18px rgba(0, 74, 173, 0.08);
-}}
-
-/* Project card look */
 .project-card {{
   background: white;
   border-radius: 12px;
-  padding: 16px;
-  border: 1px solid rgba(0,0,0,0.04);
-  transition: box-shadow 0.12s ease, transform 0.08s ease;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }}
 .project-card:hover {{
-  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-  transform: translateY(-4px);
-}}
-.skill-badge {{
-  display:inline-block;
-  padding:6px 10px;
-  margin:4px 6px 4px 0;
-  border-radius:999px;
-  background-color: var(--accent);
-  color: var(--primary);
-  font-weight:600;
-  font-size: 13px;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
 }}
 
-.timeline-entry {{
-  padding: 12px 14px;
-  border-left: 4px solid var(--primary);
-  background: white;
-  border-radius: 8px;
-  margin-bottom: 14px;
+.skill-badge {{
+  background-color: var(--accent);
+  color: var(--primary);
+  padding: 6px 10px;
+  border-radius: 999px;
+  margin: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+}}
+
+.profile-img {{
+  border-radius: 50%;
+  border: 4px solid rgba(0,0,0,0.05);
 }}
 </style>
 """,
@@ -143,244 +141,121 @@ h1, h2, h3, h4 {{
 )
 
 # -------------------- SIDEBAR --------------------
-st.sidebar.image("https://i.imgur.com/4ZQZ9l5.png", width=140, caption="(placeholder image)", use_column_width=False)
-st.sidebar.title("Oluyale Ezekiel")
-st.sidebar.markdown("**NLP & ML Enthusiast** 🤖")
-st.sidebar.markdown("---")
+st.sidebar.image(
+    "https://i.imgur.com/9QpP2hZ.png",
+    width=150,
+    caption="Oluyale Ezekiel",
+    use_container_width=False
+)
+st.sidebar.markdown("**NLP & Machine Learning Enthusiast** 🤖")
+st.sidebar.divider()
 
-# skill filter (interactive)
 all_skills = ["Transformers", "NLP", "Summarization", "QA", "NER", "Topic Modeling", "Sentiment"]
-# selected skill filter - acts as a simple project filter
-st.sidebar.markdown("### 🔎 Filter projects by skill")
-skill_filter = st.sidebar.selectbox("Skill (Optional)", options=["All"] + all_skills, index=0)
+skill_filter = st.sidebar.selectbox("🔍 Filter Projects by Skill", options=["All"] + all_skills, index=0)
 
-st.sidebar.markdown("---")
+st.sidebar.divider()
 st.sidebar.markdown("📧 [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
-st.sidebar.markdown("📞 +234 812 345 6789")
 st.sidebar.markdown("🔗 [LinkedIn](https://linkedin.com/in/oluyaleezekiel)")
 st.sidebar.markdown("🐙 [GitHub](https://github.com/amusEcode)")
+st.sidebar.divider()
 
-# safe CV download
 cv_path = "Ezekiel_Oluyale_Resume.pdf"
 if os.path.exists(cv_path):
     with open(cv_path, "rb") as f:
         st.sidebar.download_button("📄 Download CV", f.read(), file_name="Ezekiel_Oluyale_Resume.pdf", mime="application/pdf")
 else:
-    st.sidebar.info("CV not found in folder. Add `Ezekiel_Oluyale_Resume.pdf` to enable download.")
+    st.sidebar.info("Upload your CV to enable this button.")
 
-st.sidebar.markdown("---")
+st.sidebar.divider()
 
-# navigation using Streamlit radio (keeps default hamburger icon)
 pages = ["About", "Projects", "Skills", "Experience", "Contact"]
-page = st.sidebar.radio("Navigate", pages, index=0)
+page = st.sidebar.radio("Navigate", pages)
 
 # -------------------- PAGE CONTENT --------------------
-# ABOUT
 if page == "About":
-    col_left, col_right = st.columns([1, 2], gap="medium")
-    with col_left:
-        # circular image (placeholder)
-        st.markdown('<img class="profile-img" src="https://i.imgur.com/4ZQZ9l5.png" width="200"/>', unsafe_allow_html=True)
-        st.write("")
-        st.markdown("**Location:** Nigeria")
-        st.markdown("**Open to:** Remote Roles / MSc Supervision")
-        st.write("")
-        # contact mini buttons
-        c1, c2 = st.columns([1, 1])
-        with c1:
-            st.markdown("[💼 GitHub](https://github.com/amusEcode)")
-        with c2:
-            st.markdown("[🔗 LinkedIn](https://linkedin.com/in/oluyaleezekiel)")
-
-    with col_right:
-        st.title("Hi — I'm Oluyale Ezekiel")
+    col1, col2 = st.columns([1, 2], gap="large")
+    with col1:
+        st.markdown('<img class="profile-img" src="https://i.imgur.com/9QpP2hZ.png" width="200"/>', unsafe_allow_html=True)
+        st.markdown("**📍 Nigeria**")
+        st.markdown("**💼 Open to:** Remote Roles / MSc Supervision")
+    with col2:
+        st.title("Hi, I'm Oluyale Ezekiel")
         st.subheader("Machine Learning & NLP Enthusiast")
         st.write(
             """
-            I build NLP systems that convert messy text into actionable insights.
-            My work spans text summarization, question-answering, named entity recognition,
-            and sentiment analysis. I enjoy crafting models that solve real user problems —
-            especially in multilingual settings.
+            I build intelligent NLP systems that turn text into actionable insights.
+            My focus areas include **summarization**, **question answering**, **NER**, and **sentiment analysis** —
+            with a growing interest in multilingual NLP applications.
             """
         )
-        st.markdown("**Short stories (micro):**")
-        st.markdown(
-            "- 🎓 *From learning tokenization to fine-tuning transformers, I love turning research into products.*\n"
-            "- 🛠 *I deliver end-to-end projects — from data cleaning and model training to deployment and UX.*\n"
-            "- 🌍 *I’m passionate about making NLP accessible across languages.*"
-        )
-
-    st.markdown("---")
-    # nice Lottie about NLP/ML
+        st.markdown("**Quick highlights:**")
+        st.markdown("""
+        - 🎓 From learning tokenization to fine-tuning transformers  
+        - 🛠 Delivering end-to-end NLP projects (data → deployment)  
+        - 🌍 Advocating for multilingual NLP accessibility
+        """)
+    st.divider()
     if nlp_anim:
         st_lottie(nlp_anim, height=320)
     else:
-        st.info("NLP animation failed to load — replace the Lottie URL if needed.")
+        st.info("Animation failed to load — you can replace the Lottie URL.")
 
-# PROJECTS
 elif page == "Projects":
-    st.header("🚀 Projects — interactive showcase")
-    st.write("Click an item to expand. Use the skill filter in the sidebar to narrow projects.")
-
-    # sample project data (you have 8 at Elevvo — replace entries as needed)
+    st.header("🚀 Featured Projects")
     projects = [
-        {
-            "title": "Abstractive Text Summarizer",
-            "summary": "Fine-tuned a transformer to generate concise summaries for long text.",
-            "skills": ["Transformers", "Summarization", "NLP"],
-            "repo": "https://github.com/amusEcode/summarizer_model"
-        },
-        {
-            "title": "Question Answering System",
-            "summary": "A BERT-based QA system fine-tuned on SQuAD-style datasets to answer contextual questions.",
-            "skills": ["Transformers", "QA", "NLP"],
-            "repo": "https://github.com/amusEcode/qa_system"
-        },
-        {
-            "title": "Named Entity Recognition (NER)",
-            "summary": "Hybrid SpaCy + rule-based NER for domain-specific entity extraction.",
-            "skills": ["NER", "NLP"],
-            "repo": "https://github.com/amusEcode/ner_project"
-        },
-        {
-            "title": "Yorùbá Sentiment Classifier",
-            "summary": "Built a sentiment classifier for Yorùbá tweets using SVM and transformers ensembles.",
-            "skills": ["NLP", "Sentiment", "Transformers"],
-            "repo": "https://github.com/amusEcode/yoruba_sentiment"
-        },
-        {
-            "title": "Topic Modeling Dashboard",
-            "summary": "Interactive topic modeling with LDA & NMF; visualized top terms and document assignments.",
-            "skills": ["Topic Modeling", "NLP"],
-            "repo": "#"
-        },
+        {"title": "Abstractive Text Summarizer", "summary": "Fine-tuned a transformer model to generate concise summaries.", "skills": ["Summarization", "Transformers", "NLP"], "repo": "https://github.com/amusEcode/summarizer_model"},
+        {"title": "Question Answering System", "summary": "Built a contextual QA system using BERT fine-tuned on SQuAD.", "skills": ["QA", "Transformers"], "repo": "https://github.com/amusEcode/qa_system"},
+        {"title": "Named Entity Recognition", "summary": "Hybrid rule-based + SpaCy NER for domain-specific extraction.", "skills": ["NER"], "repo": "https://github.com/amusEcode/ner_project"},
+        {"title": "Yorùbá Sentiment Classifier", "summary": "Developed multilingual sentiment model using SVM + BERT.", "skills": ["Sentiment", "NLP"], "repo": "https://github.com/amusEcode/yoruba_sentiment"},
     ]
 
-    # filter projects by sidebar selection
-    filtered = []
-    for p in projects:
-        if skill_filter == "All" or skill_filter in p["skills"]:
-            filtered.append(p)
-
-    # layout projects in two columns, with nice card style and expander for details
+    filtered = [p for p in projects if skill_filter == "All" or skill_filter in p["skills"]]
     cols = st.columns(2, gap="large")
     for i, proj in enumerate(filtered):
-        col = cols[i % 2]
-        with col:
+        with cols[i % 2]:
             st.markdown('<div class="project-card">', unsafe_allow_html=True)
             st.subheader(proj["title"])
             st.write(proj["summary"])
-            # skill badges
-            skill_html = "".join([f'<span class="skill-badge">{s}</span>' for s in proj["skills"]])
-            st.markdown(skill_html, unsafe_allow_html=True)
-            # action buttons
-            b1, b2 = st.columns([1, 1])
-            with b1:
-                if st.button(f"View Repo ▶ {i}", key=f"repo_{i}"):
-                    st.experimental_set_query_params(view=proj["title"].replace(" ", "_"))
-                    st.write(f"[Repository]({proj['repo']})")
-            with b2:
-                with st.expander("Details & Notes"):
-                    st.write("Detailed description, model choices, dataset info, evaluation metrics, and demo link go here.")
+            st.markdown("".join([f"<span class='skill-badge'>{s}</span>" for s in proj["skills"]]), unsafe_allow_html=True)
+            st.markdown(f"[🔗 View Repository]({proj['repo']})")
             st.markdown("</div>", unsafe_allow_html=True)
 
-    if len(filtered) == 0:
-        st.info("No projects match this filter. Try selecting 'All' or another skill.")
-
-# SKILLS
 elif page == "Skills":
-    st.header("🧠 Skills & Tools")
-    st.write("Click a skill to see related projects (interactive).")
+    st.header("🧠 Technical Skills")
+    st.markdown("Explore my toolkit for NLP & ML development.")
+    cols = st.columns(3)
+    skills = ["Transformers", "SpaCy", "Scikit-learn", "PyTorch", "Pandas", "Streamlit", "Hugging Face", "Matplotlib", "Numpy"]
+    for i, skill in enumerate(skills):
+        with cols[i % 3]:
+            st.markdown(f"<div class='project-card'><b>{skill}</b></div>", unsafe_allow_html=True)
 
-    # skill cards with simple interactivity
-    skill_cols = st.columns(3)
-    skill_list = ["Transformers", "SpaCy", "Topic Modeling", "QA", "NER", "Sentiment", "Streamlit", "Hugging Face"]
-    for i, skill in enumerate(skill_list):
-        c = skill_cols[i % 3]
-        with c:
-            if st.button(skill, key=f"skill_{i}"):
-                # set the sidebar selectbox to reflect filter (use query params as hint)
-                # (we can't programmatically change the sidebar selectbox from here easily)
-                st.success(f"Try filtering projects by **{skill}** from the left sidebar.")
-            st.markdown(f"<div style='height:8px'></div>", unsafe_allow_html=True)
-
-    st.markdown("---")
-    st.subheader("Tooling")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown("- Python\n- NumPy\n- Pandas")
-    with col2:
-        st.markdown("- PyTorch\n- scikit-learn\n- Transformers")
-    with col3:
-        st.markdown("- SpaCy\n- Hugging Face\n- Streamlit")
-
-# EXPERIENCE
 elif page == "Experience":
-    st.header("💼 Experience")
-    st.write("Timeline of relevant roles & achievements")
+    st.header("💼 Professional Experience")
+    st.markdown("""
+    **NLP Intern — Elevvo Pathways (Remote)**  
+    *Jan 2025 – Oct 2025*  
+    - Built 8 end-to-end NLP projects (Summarization, QA, NER, Sentiment)  
+    - Worked on data cleaning, fine-tuning, and Streamlit deployment  
+    ---
+    **Freelance NLP Developer**  
+    *2024 – Present*  
+    - Built prototype NLP tools for content analysis and moderation  
+    """)
 
-    st.markdown('<div class="timeline-entry">', unsafe_allow_html=True)
-    st.subheader("NLP Intern — Elevvo Pathways (Remote)")
-    st.markdown("**Jan 2025 – Oct 2025**")
-    st.write(
-        "- Built 8 end-to-end NLP projects including Summarization, QA, NER and Sentiment Analysis.\n"
-        "- Responsibilities: data cleaning, model fine-tuning, evaluation, deployment & UX."
-    )
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    st.markdown('<div class="timeline-entry">', unsafe_allow_html=True)
-    st.subheader("Freelance NLP Projects")
-    st.markdown("**2024 – Present**")
-    st.write("- Prototype NLP tools for content summarization and moderation.")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    st.markdown("---")
-    st.info("Tip: Add more experience entries or publications here. This layout scales well for multiple cards.")
-
-# CONTACT
 elif page == "Contact":
-    st.header("📬 Contact")
-    st.write("Shoot me a message — either send an email, download my CV, or use the form below.")
-
-    c1, c2 = st.columns([1, 1])
-    with c1:
+    st.header("📬 Get in Touch")
+    col1, col2 = st.columns([1, 1])
+    with col1:
         if contact_anim:
             st_lottie(contact_anim, height=260)
-        else:
-            st.write("Contact animation failed to load.")
-    with c2:
-        # responsive contact form — uses FormSubmit to email; also shows a demo in-app submit
-        st.markdown("**Prefer email?** [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
-        st.markdown("**Phone:** +234 812 345 6789")
-        st.markdown("---")
-
-        # Streamlit form (local demo)
+    with col2:
         with st.form("contact_form"):
-            name = st.text_input("Your name")
-            email = st.text_input("Your email")
-            message = st.text_area("Message", height=150)
-            submitted = st.form_submit_button("Send (demo)")
+            name = st.text_input("Your Name")
+            email = st.text_input("Your Email")
+            msg = st.text_area("Message")
+            submitted = st.form_submit_button("Send (Demo)")
             if submitted:
-                st.success("Thanks — this is a demo submit. Replace with FormSubmit or a backend to receive messages.")
-        st.markdown("---")
-        # HTML form using formsubmit (uncomment / edit email)
-        st.markdown(
-            """
-            <form action="https://formsubmit.co/oluyale.ezekiel@example.com" method="POST" target="_blank">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="text" name="name" placeholder="Your name" required style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #ddeeff;">
-                <input type="email" name="email" placeholder="Your email" required style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #ddeeff;">
-                <textarea name="message" placeholder="Your message" required style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddeeff;height:120px"></textarea>
-                <div style='height:10px'></div>
-                <button type="submit" style="background-color:{p};color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer">Send Message</button>
-            </form>
-            """.replace("{p}", PRIMARY),
-            unsafe_allow_html=True,
-        )
+                st.success("Thanks! This is a demo. Connect with me on LinkedIn or email.")
 
-# FOOTER
-st.markdown("---")
-st.markdown(
-    "<p style='text-align:center; color:#566;'>© 2025 Oluyale Ezekiel | Built with ❤️ using Streamlit</p>",
-    unsafe_allow_html=True,
-)
+st.divider()
+st.markdown("<p style='text-align:center; color:gray;'>© 2025 Oluyale Ezekiel — Built with ❤️ using Streamlit</p>", unsafe_allow_html=True)
