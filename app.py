@@ -2,134 +2,128 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
-# ----- Page Config -----
+# ----- PAGE CONFIG -----
 st.set_page_config(page_title="Oluyale Ezekiel | NLP & ML Portfolio", layout="wide")
 
-# ----- Load Lottie Animation -----
+# ----- LOAD LOTTIE -----
 def load_lottie_url(url: str):
     r = requests.get(url)
     if r.status_code != 200:
         return None
     return r.json()
 
-# NLP/ML-themed Lottie animation
-nlp_lottie = load_lottie_url("https://assets5.lottiefiles.com/packages/lf20_kyu7xb1v.json")
+# NLP/ML themed Lottie animation
+nlp_ml_lottie = load_lottie_url("https://lottie.host/1aee4318-90d3-4560-b0e9-3d9f94635d2f/QyToM6Sgxt.json")
 
-# ----- Sidebar -----
+# ----- SIDEBAR -----
 with st.sidebar:
-    st.image("https://i.imgur.com/qG2H6rD.png", width=150)
-    st.title("Oluyale Ezekiel")
-    st.markdown("**Machine Learning & NLP Engineer**")
+    st.title("🔍 Portfolio Navigation")
+    search_query = st.text_input("Search Projects or Skills", placeholder="Type to search...")
     st.markdown("---")
-
     selected = st.radio(
-        "Navigate",
+        "Sections",
         ["About Me", "Projects", "Skills", "Experience", "Contact"],
         index=0
     )
 
-# ----- Custom CSS -----
+# ----- CUSTOM STYLES -----
 st.markdown("""
     <style>
-        /* Sidebar style */
         [data-testid="stSidebar"] {
-            background-color: #f8fbff;
+            background-color: #f7faff;
             color: #004aad;
-        }
-        /* Radio button hover and active styles */
-        div[role="radiogroup"] > label:hover {
-            background-color: #dce9ff;
-            border-radius: 8px;
-            transition: all 0.3s ease;
         }
         div[role="radiogroup"] > label {
             padding: 5px 10px;
+            border-radius: 8px;
+        }
+        div[role="radiogroup"] > label:hover {
+            background-color: #dce9ff;
+            transition: all 0.3s ease;
         }
         div[role="radiogroup"] > label[data-checked="true"] {
             background-color: #004aad;
             color: white !important;
-            border-radius: 8px;
         }
-        /* Button hover effect */
         div.stButton > button:hover {
             background-color: #0066cc;
             color: white;
             transition: 0.3s ease;
         }
-        /* Global layout tweaks */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: #004aad;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# ----- About Me -----
+# ----- ABOUT ME -----
 if selected == "About Me":
-    left, right = st.columns([1, 1.2])
+    st.header("👋 About Me")
+    left, mid, right = st.columns([1, 1.5, 1])
+
     with left:
-        st.header("👋 About Me")
+        st.image("https://i.imgur.com/qG2H6rD.png", width=250)
+    with mid:
         st.write("""
-        I'm **Oluyale Ezekiel**, a passionate **Machine Learning and NLP Engineer** 
-        focused on building intelligent systems that understand and process human language.  
-        I enjoy transforming text data into actionable insights through deep learning and 
-        transformer-based models.
+        I'm **Oluyale Ezekiel**, a passionate **Machine Learning and NLP Engineer** dedicated to building 
+        intelligent systems that process and understand human language.  
+        
+        My work focuses on projects involving **Sentiment Analysis**, **Text Summarization**, **NER**, 
+        and **Question Answering Systems** using deep learning and transformer-based models.  
 
-        My interests span **text summarization**, **sentiment analysis**, 
-        **question answering**, and **multilingual NLP**.
+        I enjoy turning ideas into functional ML solutions and creating tools that make data talk.
         """)
-        st.markdown("📍 Based in Nigeria | 🌐 Open to remote collaborations")
+        st.markdown("🌍 Based in Nigeria | 🤝 Open to remote roles and collaborations")
     with right:
-        if nlp_lottie:
-            st_lottie(nlp_lottie, height=300, key="about")
+        if nlp_ml_lottie:
+            st_lottie(nlp_ml_lottie, height=280, key="nlpml")
 
-# ----- Projects -----
+# ----- PROJECTS -----
 elif selected == "Projects":
-    st.header("🧠 My Projects")
-    st.markdown("Here are some of the projects I’ve worked on — each focused on real-world NLP & ML problems.")
+    st.header("🧠 Projects")
+    st.markdown("Explore some of the NLP & ML projects I’ve worked on.")
 
-    cols = st.columns(2)
-    with cols[0]:
-        st.subheader("1️⃣ Sentiment Analysis on Tweets")
-        st.write("Built a model to classify text as positive, negative, or neutral using SVM and BERT.")
-        st.image("https://i.imgur.com/dR9zGJx.png", use_container_width=True)
+    # Filter via search bar
+    projects = {
+        "Sentiment Analysis": "Built a model to classify text sentiment (positive, negative, neutral) using SVM and BERT.",
+        "Question Answering System": "Developed a QA system using fine-tuned transformer models (SQuAD dataset).",
+        "Topic Modeling": "Used LDA & NMF to discover hidden themes in news articles.",
+        "Text Summarization": "Built an abstractive text summarizer using transformer-based models."
+    }
 
-    with cols[1]:
-        st.subheader("2️⃣ Question Answering System")
-        st.write("Developed a QA system that answers questions based on a given passage using fine-tuned transformer models.")
-        st.image("https://i.imgur.com/RC7nJ2y.png", use_container_width=True)
+    for title, desc in projects.items():
+        if search_query.lower() in title.lower() or search_query.lower() in desc.lower():
+            st.subheader(f"📘 {title}")
+            st.write(desc)
+            st.image("https://i.imgur.com/dR9zGJx.png", use_container_width=True)
+            st.markdown("---")
 
-    st.markdown("*(More projects coming soon...)*")
-
-# ----- Skills -----
+# ----- SKILLS -----
 elif selected == "Skills":
     st.header("🧩 Technical Skills")
-    st.markdown("""
-    ### 🧠 Machine Learning
-    - Scikit-learn, TensorFlow, PyTorch  
-    - Model Evaluation & Hyperparameter Tuning  
+    st.markdown("Hover over a skill to explore more.")
+    skills = {
+        "Machine Learning": ["Scikit-learn", "TensorFlow", "PyTorch", "Model Optimization"],
+        "Natural Language Processing": ["spaCy", "Hugging Face", "NER", "Text Summarization", "Sentiment Analysis"],
+        "Programming": ["Python", "Git", "Streamlit", "Jupyter", "VS Code"]
+    }
 
-    ### 💬 Natural Language Processing
-    - spaCy, Hugging Face Transformers  
-    - Text Preprocessing, Named Entity Recognition (NER)  
-    - Sentiment Analysis, Topic Modeling, Summarization  
+    for category, items in skills.items():
+        with st.expander(f"💡 {category}"):
+            st.write(", ".join(items))
 
-    ### 💻 Programming & Tools
-    - Python, Streamlit, Git, GitHub  
-    - VS Code, Jupyter Notebook  
-    """)
-
-# ----- Experience -----
+# ----- EXPERIENCE -----
 elif selected == "Experience":
     st.header("💼 Experience")
-    st.subheader("Elevvo Pathways — NLP Intern")
+    st.subheader("Elevvo Pathways — NLP Intern (2025)")
     st.write("""
-    - Gained hands-on experience applying NLP concepts to real-world datasets.  
-    - Built and deployed projects including **NER**, **Sentiment Analysis**, **Topic Modeling**, and **Text Summarization**.  
-    - Learned how to preprocess text, fine-tune transformer models, and evaluate performance.  
-    - Worked in a collaborative, remote-based environment with mentorship.
+    - Applied NLP concepts to real-world datasets, building and deploying production-grade models.  
+    - Completed 8 projects: NER, Sentiment Analysis, Topic Modeling, Text Summarization, and QA Systems.  
+    - Improved proficiency in data preprocessing, model fine-tuning, and deployment using Streamlit.  
+    - Collaborated remotely under expert mentorship and learned best ML practices.
     """)
 
-# ----- Contact -----
+# ----- CONTACT -----
 elif selected == "Contact":
     st.header("📬 Contact Me")
 
@@ -140,7 +134,7 @@ elif selected == "Contact":
         submitted = st.form_submit_button("Send Message")
 
         if submitted:
-            st.success(f"Thank you, {name}! Your message has been sent successfully.")
+            st.success(f"Thank you, {name}! Your message has been received successfully.")
 
     st.markdown("---")
     st.markdown("📧 **Email:** oluyaleezekiel@gmail.com")
