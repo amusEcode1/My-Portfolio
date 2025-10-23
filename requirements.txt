@@ -1,5 +1,3 @@
-pandas
-torch
-transformers
-evaluate
 streamlit
+streamlit-lottie
+requests
