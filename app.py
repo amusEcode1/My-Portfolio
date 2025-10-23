@@ -144,7 +144,7 @@ with col1:
     st_lottie(contact_anim, height=200, key="contact")
 with col2:
     st.markdown("""
-    <form action="https://formsubmit.co/oluyale.ezekiel@example.com" method="POST">
+    <form action="https://formsubmit.co/ezekieloluyale@gmail.com" method="POST">
         <input type="text" name="name" placeholder="Your Name" required><br><br>
         <input type="email" name="email" placeholder="Your Email" required><br><br>
         <textarea name="message" placeholder="Your Message" required></textarea><br><br>
