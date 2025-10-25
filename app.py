@@ -46,7 +46,7 @@ button:hover {
 # ---------- SIDEBAR NAVIGATION ----------
 st.sidebar.image("logo.png", width=150)
 st.sidebar.title("Oluyale Ezekiel")
-st.sidebar.markdown("**NLP & ML Enthusiast** 🤖")
+st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer** 🤖")
 
 pages = [
     "About Me",
@@ -58,8 +58,8 @@ pages = [
 selected = st.sidebar.radio("Navigate", pages)
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("🔗 [LinkedIn](https://linkedin.com/in/oluyaleezekiel)")
-st.sidebar.markdown("🐙 [GitHub](https://github.com/amusEcode)")
+st.sidebar.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/ezekiel-oluyale)")
+st.sidebar.markdown("🐙 [GitHub](https://github.com/amusEcode1)")
 
 cv_path = "Ezekiel_Oluyale_Resume.pdf"
 if os.path.exists(cv_path):
@@ -177,8 +177,8 @@ elif selected == "Contact":
     st.markdown("---")
     st.write("📞 **Phone:** +234 812 345 6789")
     st.write("📧 **Email:** [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
-    st.write("🔗 **LinkedIn:** [linkedin.com/in/oluyaleezekiel](https://linkedin.com/in/oluyaleezekiel)")
-    st.write("🐙 **GitHub:** [github.com/amusEcode](https://github.com/amusEcode)")
+    st.write("🔗 **LinkedIn:** [linkedin.com/in/oluyaleezekiel](https://www.linkedin.com/in/ezekiel-oluyale)")
+    st.write("🐙 **GitHub:** [github.com/amusEcode](https://github.com/amusEcode1)")
 
 # FOOTER
 st.markdown("---")
