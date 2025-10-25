@@ -58,7 +58,7 @@ selected = st.sidebar.radio("Navigate", pages)
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/ezekiel-oluyale)")
-st.sidebar.markdown("🐙 [GitHub](https://github.com/amusEcode1)")
+st.sidebar.markdown("🔗 [GitHub](https://github.com/amusEcode1)")
 
 cv_path = "Ezekiel_Oluyale_Resume.pdf"
 if os.path.exists(cv_path):
@@ -175,7 +175,7 @@ elif selected == "Contact":
     st.write("📞 **Phone:** +234 812 345 6789")
     st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
     st.write("🔗 **LinkedIn:** [Ezekiel Oluyale](https://www.linkedin.com/in/ezekiel-oluyale)")
-    st.write("🐙 **GitHub:** [@amusEcode1](https://github.com/amusEcode1)")
+    st.write("🔗 **GitHub:** [@amusEcode1](https://github.com/amusEcode1)")
 
 # FOOTER
 st.markdown("---")
