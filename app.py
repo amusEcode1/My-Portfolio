@@ -1,211 +1,188 @@
-# app.py
 import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
+import os
 
-# -------------------- CONFIG --------------------
+# ---------- PAGE CONFIG ----------
 st.set_page_config(
     page_title="Oluyale Ezekiel | NLP & ML Portfolio",
     page_icon="🤖",
-    layout="wide",
+    layout="wide"
 )
 
-# -------------------- SESSION STATE --------------------
-if "menu_open" not in st.session_state:
-    st.session_state.menu_open = False
-
-# Ensure a page query param exists
-if "page" not in st.query_params:
-    st.query_params["page"] = "Home"
-
-# -------------------- LOTTIE LOADER --------------------
-def load_lottieurl(url: str):
-    try:
-        r = requests.get(url, timeout=5)
-        if r.status_code == 200:
-            return r.json()
-    except Exception:
+# ---------- LOAD ANIMATIONS ----------
+def load_lottie(url):
+    r = requests.get(url)
+    if r.status_code != 200:
         return None
-    return None
+    return r.json()
 
-lottie_home = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_yd8fbnml.json")
-lottie_skills = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json")
-lottie_projects = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_w51pcehl.json")
-lottie_experience = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_ydo1amjm.json")
-lottie_contact = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json")
+nlp_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_jtbfg2nb.json")
+contact_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_t24tpvcu.json")
 
-# -------------------- CSS --------------------
-st.markdown(
-    """
-    <style>
-    /* NAVBAR */
-    .navbar {
-        background: #004aad;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 0 0 12px 12px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .nav-title {
-        font-weight: 700;
-        font-size: 20px;
-    }
-    .hambutton {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        padding: 6px 10px;
-        border-radius: 8px;
-    }
-    .hambutton:hover { background: rgba(255,255,255,0.06); }
+# ---------- CUSTOM CSS ----------
+st.markdown("""
+<style>
+body {
+    background-color: #f7faff;
+}
+h1, h2, h3, h4 {
+    color: #003366;
+}
+img {
+    border-radius: 20px;
+}
+button {
+    background-color: #003366 !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+button:hover {
+    background-color: #0055cc !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
-    /* Menu - by default hidden on small screens (we control visibility inline via style attr) */
-    .menu {
-        display: flex;
-        gap: 14px;
-        padding: 10px 18px;
-        background: #004aad;
-        color: white;
-        border-radius: 0 0 12px 12px;
-        flex-wrap: wrap;
-    }
-    .menu button {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 15px;
-        cursor: pointer;
-        padding: 8px 12px;
-        border-radius: 8px;
-    }
-    .menu button:hover { background: rgba(255,255,255,0.06); }
+# ---------- SIDEBAR NAVIGATION ----------
+st.sidebar.image("https://i.imgur.com/8Km9tLL.png", width=150)
+st.sidebar.title("Oluyale Ezekiel")
+st.sidebar.markdown("**NLP & ML Enthusiast** 🤖")
 
-    /* active style for current page */
-    .menu .active {
-        color: #bfe6ff;
-        font-weight: 700;
-    }
+pages = [
+    "About Me",
+    "Projects",
+    "Skills",
+    "Experience",
+    "Contact"
+]
+selected = st.sidebar.radio("Navigate", pages)
 
-    /* On wide screens always show the menu as a horizontal row */
-    @media (min-width: 900px) {
-        .menu { display: flex !important; }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+st.sidebar.markdown("---")
+st.sidebar.markdown("📧 [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
+st.sidebar.markdown("🔗 [LinkedIn](https://linkedin.com/in/oluyaleezekiel)")
+st.sidebar.markdown("🐙 [GitHub](https://github.com/amusEcode)")
 
-# -------------------- NAVBAR (pure Streamlit controls) --------------------
-col1, col2 = st.columns([8, 1])
-with col1:
-    st.markdown("<div class='navbar'><div class='nav-title'>Oluyale Ezekiel</div></div>", unsafe_allow_html=True)
-with col2:
-    # This button toggles the menu on small screens
-    if st.button("☰", key="hamburger"):
-        st.session_state.menu_open = not st.session_state.menu_open
+cv_path = "Ezekiel_Oluyale_Resume.pdf"
+if os.path.exists(cv_path):
+    with open(cv_path, "rb") as pdf_file:
+        st.sidebar.download_button(
+            label="📄 Download CV",
+            data=pdf_file.read(),
+            file_name="Ezekiel_Oluyale_Resume.pdf",
+            mime="application/pdf",
+        )
+else:
+    st.sidebar.warning("⚠️ CV not found. Upload it later.")
 
-# Decide menu inline style: visible if menu_open or wide screens (CSS will force visible on wide)
-menu_style = "display:flex;" if st.session_state.menu_open else "display:none;"
+# ---------- PAGE CONTENT ----------
 
-# Render the menu div; CSS media query makes it visible automatically on wide screens
-st.markdown(f"<div class='menu' style='{menu_style}'>", unsafe_allow_html=True)
-
-# Navigation buttons (using st.button so clicks trigger a rerun and we react in Python)
-def nav_to(p):
-    st.query_params["page"] = p
-    # close menu on small screens for better UX
-    st.session_state.menu_open = False
-
-current_page = st.query_params.get("page", "Home")
-
-# We use st.columns to layout the buttons inside the menu area nicely
-# But for simplicity here we render them one by one
-if st.button("🏠 Home", key="nav_home"):
-    nav_to("Home")
-if st.button("🧠 Skills", key="nav_skills"):
-    nav_to("Skills")
-if st.button("🚀 Projects", key="nav_projects"):
-    nav_to("Projects")
-if st.button("📚 Experience", key="nav_experience"):
-    nav_to("Experience")
-if st.button("📞 Contact", key="nav_contact"):
-    nav_to("Contact")
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# After rendering menu and possible clicks, read the current page and render content
-page = st.query_params.get("page", "Home")
-
-# -------------------- PAGES --------------------
-if page == "Home":
-    col1, col2 = st.columns([1, 1])
+# ABOUT ME PAGE
+if selected == "About Me":
+    col1, col2 = st.columns([1, 2])
     with col1:
-        try:
-            st.image("assets/profile.png", width=300)
-        except Exception:
-            st.warning("Add your profile image at assets/profile.png")
+        st.image("https://i.imgur.com/4ZQZ9l5.png", width=230)  # placeholder image
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
-        st.subheader("NLP & Machine Learning Engineer")
+        st.subheader("Machine Learning & NLP Enthusiast")
         st.write(
-            "I build intelligent systems that process and understand human language. "
-            "My work spans Text Summarization, Sentiment Analysis, NER, and transformer fine-tuning."
+            """
+            I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
+            smarter and more accessible.  
+            
+            My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like 
+            **Text Summarization**, **Question Answering**, **Named Entity Recognition**, and **Sentiment Analysis**.
+            
+            I enjoy turning raw data into real insights, and I’m currently expanding into **multilingual NLP** and 
+            **transformer-based systems**.
+            """
         )
-        if lottie_home:
-            st_lottie(lottie_home, height=260)
-    st.divider()
-    c1, c2 = st.columns(2)
-    c1.metric("Projects", "5+")
-    c2.metric("Focus", "NLP & ML")
+    st.markdown("---")
+    st_lottie(nlp_anim, height=250, key="nlp")
 
-elif page == "Skills":
-    st.header("🧠 Skills")
-    if lottie_skills:
-        st_lottie(lottie_skills, height=220)
-    st.subheader("Languages & Libraries")
-    st.write("- Python\n- NumPy, Pandas\n- scikit-learn\n- Transformers (Hugging Face)\n- spaCy, NLTK")
-    st.subheader("Tools")
-    st.write("- Streamlit, Git, Hugging Face Hub, Jupyter")
+# PROJECTS PAGE
+elif selected == "Projects":
+    st.header("🚀 Featured NLP Projects")
+    project_data = [
+        {
+            "title": "Text Summarization App",
+            "desc": "Built an abstractive summarization app using fine-tuned transformer models to generate concise summaries.",
+            "tech": "Python, Hugging Face, Streamlit",
+            "link": "https://github.com/amusEcode/summarizer_model"
+        },
+        {
+            "title": "Question Answering System",
+            "desc": "Developed a system that answers questions from context using BERT fine-tuned on the SQuAD dataset.",
+            "tech": "Transformers, Python, Streamlit",
+            "link": "#"
+        },
+        {
+            "title": "Named Entity Recognition",
+            "desc": "Implemented a custom model for identifying entities such as people, organizations, and places in text.",
+            "tech": "SpaCy, Rule-based Matching",
+            "link": "#"
+        }
+    ]
 
-elif page == "Projects":
-    st.header("🚀 Projects")
-    if lottie_projects:
-        st_lottie(lottie_projects, height=200)
-    st.subheader("Yorùbá Sentiment Analyzer")
-    st.write("Classifies Yorùbá tweets as Positive / Negative / Neutral using transformer models.")
-    st.divider()
-    st.subheader("Abstractive Text Summarizer")
-    st.write("Fine-tuned transformer-based abstractive summarizer.")
-    st.divider()
-    st.subheader("Topic Modeling Dashboard")
-    st.write("Interactive LDA & NMF topic modeling exploration.")
+    for proj in project_data:
+        st.subheader(proj["title"])
+        st.write(proj["desc"])
+        st.caption(f"**Tech Used:** {proj['tech']}")
+        st.link_button("🔗 View Project", proj["link"])
+        st.markdown("---")
 
-elif page == "Experience":
-    st.header("📚 Experience & Education")
-    if lottie_experience:
-        st_lottie(lottie_experience, height=200)
-    st.write("🏢 Elevvo Pathways — NLP Intern (Jun 2025 - Oct 2025)")
-    st.write("🎓 Federal University of Oye-Ekiti — B.Eng")
-    st.write("Research interests: low-resource language NLP, model efficiency, explainability.")
+# SKILLS PAGE
+elif selected == "Skills":
+    st.header("🧠 Skills & Tools")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown("**Programming:** Python, JavaScript")
+        st.markdown("**ML Frameworks:** PyTorch, scikit-learn")
+    with col2:
+        st.markdown("**NLP Libraries:** SpaCy, NLTK, Transformers")
+        st.markdown("**Tools:** Streamlit, Hugging Face, Git")
+    with col3:
+        st.markdown("**Concepts:** Tokenization, Embeddings, Fine-tuning, Topic Modeling")
+    st.markdown("---")
+    st.success("Always learning — expanding into Multilingual NLP & LLM fine-tuning.")
 
-elif page == "Contact":
-    st.header("📞 Contact")
-    if lottie_contact:
-        st_lottie(lottie_contact, height=200)
-    with st.form("contact_form"):
-        name = st.text_input("Name")
-        email = st.text_input("Email")
-        message = st.text_area("Message")
-        if st.form_submit_button("Send"):
-            if name and email and message:
-                st.success("Message received (demo).")
-            else:
-                st.warning("Please fill all fields.")
+# EXPERIENCE PAGE
+elif selected == "Experience":
+    st.header("💼 Experience")
+    st.subheader("NLP Intern — Elevvo Pathways (Remote)")
+    st.write(
+        """
+        During my internship at **Elevvo Pathways**, I developed and deployed **8 end-to-end NLP projects** applying real-world
+        concepts like text preprocessing, model fine-tuning, and evaluation.  
+        
+        My tasks spanned multiple domains — from **Named Entity Recognition** to **Topic Modeling**, **Summarization**, and 
+        **Sentiment Analysis** — helping me transition from learner to hands-on NLP practitioner.
+        """
+    )
+    st.caption("Jan 2025 – Oct 2025 | Remote Internship")
 
-# -------------------- FOOTER --------------------
+# CONTACT PAGE
+elif selected == "Contact":
+    st.header("📬 Get In Touch")
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st_lottie(contact_anim, height=250, key="contact")
+    with col2:
+        st.markdown("""
+        <form action="https://formsubmit.co/oluyale.ezekiel@example.com" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required><br><br>
+            <input type="email" name="email" placeholder="Your Email" required><br><br>
+            <textarea name="message" placeholder="Your Message" required></textarea><br><br>
+            <button type="submit">Send Message</button>
+        </form>
+        """, unsafe_allow_html=True)
+    st.markdown("---")
+    st.write("📞 **Phone:** +234 812 345 6789")
+    st.write("🔗 **LinkedIn:** [linkedin.com/in/oluyaleezekiel](https://linkedin.com/in/oluyaleezekiel)")
+    st.write("🐙 **GitHub:** [github.com/amusEcode](https://github.com/amusEcode)")
+
+# FOOTER
 st.markdown("---")
-st.markdown("<div style='text-align:center;color:#6b859e;'>Built with Streamlit • Blue & White theme</div>", unsafe_allow_html=True)
+st.markdown(
+    "<p style='text-align:center; color:#666;'>© 2025 Oluyale Ezekiel | Built with ❤️ using Streamlit</p>",
+    unsafe_allow_html=True
+)
