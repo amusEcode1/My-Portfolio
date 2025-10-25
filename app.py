@@ -92,7 +92,7 @@ if selected == "About Me":
         # Compact LinkedIn + GitHub buttons (same line)
         st.markdown(
             """
-            <div style="display: flex; gap: 10px; align-items: center;">
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
                 <a href="https://www.linkedin.com/in/oluyale-ezekiel" target="_blank">
                     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
                 </a>
@@ -115,7 +115,7 @@ if selected == "About Me":
             # Compact LinkedIn + GitHub buttons (same line)
             st.markdown(
                 """
-                <div style="display: flex; gap: 10px; align-items: center;">
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
                     <a href="https://www.linkedin.com/in/oluyale-ezekiel" target="_blank">
                         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
                     </a>
@@ -129,7 +129,7 @@ if selected == "About Me":
 
     st.write(
         """
-        <br>I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
+        I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
         smarter and more accessible.  
             
         My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
