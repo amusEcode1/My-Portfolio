@@ -85,103 +85,78 @@ if os.path.exists(cv_path):
 else:
     st.sidebar.warning("⚠️ CV not found. Upload it later.")
 
-# --- Detect screen size using JavaScript ---
-st.markdown(
-    """
-    <script>
-    const isMobile = window.innerWidth < 768;
-    window.parent.postMessage({isMobile}, "*");
-    </script>
-    """,
-    unsafe_allow_html=True
-)
+import streamlit as st
 
-# --- Listen for message and update session_state ---
-if "is_mobile" not in st.session_state:
-    st.session_state["is_mobile"] = False
-
-st.markdown(
-    """
-    <script>
-    window.addEventListener("message", (event) => {
-        const data = event.data;
-        if (data && data.isMobile !== undefined) {
-            window.streamlitWebSocket.sendMessage(JSON.stringify({
-                type: "streamlit:setComponentValue",
-                key: "is_mobile",
-                value: data.isMobile
-            }));
-        }
-    });
-    </script>
-    """,
-    unsafe_allow_html=True
-)
-
-# ---------- PAGE CONTENT ----------
-
-# ABOUT ME PAGE
-if "selected" not in st.session_state:
-    st.session_state["selected"] = "About Me"
-
-if st.session_state["selected"] == "About Me":
-    is_mobile = st.session_state.get("is_mobile", False)
-
-    if is_mobile:
-        st.image("profile.jpg", width=200)
-        st.title("👋 Hi, I'm Ezekiel Oluyale")
-        st.subheader("NLP Researcher & Machine Learning Engineer")
-
+# --- ABOUT ME PAGE ---
+if selected == "About Me":
+    # Main container
+    with st.container():
         st.markdown(
             """
-            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
-                <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
-                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
-                </a>
-                <a href="https://github.com/amusEcode1" target="_blank">
-                    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white">
-                </a>
-            </div>
+            <style>
+                /* Make social buttons inline and add hover */
+                .social-links {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    margin-top: 8px;
+                    margin-bottom: 25px;
+                }
+                .social-links img {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    border-radius: 6px;
+                }
+                .social-links img:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+                }
+            </style>
             """,
             unsafe_allow_html=True,
         )
 
-    else:
-        col1, col2 = st.columns([1, 2])
+        # Use adaptive columns
+        col1, col2 = st.columns([1, 2], gap="large")
+
         with col1:
-            st.image("profile.jpg", width=200)
+            st.image("profile.jpg", width=220, use_container_width=True)
+
         with col2:
             st.title("👋 Hi, I'm Ezekiel Oluyale")
             st.subheader("NLP Researcher & Machine Learning Engineer")
 
+            # Social buttons
             st.markdown(
                 """
-                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+                <div class="social-links">
                     <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
-                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
+                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
                     </a>
                     <a href="https://github.com/amusEcode1" target="_blank">
-                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white">
+                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
                     </a>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-    st.write(
-        """
-        I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
-        smarter and more accessible.  
-        
-        My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
-        **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, and **Resume Screening**.
-        
-        I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed a strong interest in **Natural Language Processing**.
-        
-        I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing** and **Transformer-Based Models**
-        to build smarter AI systems.
-        """
-    )
+            st.write(
+                """
+                I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
+                smarter and more accessible.  
+                
+                My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like 
+                **Sentiment Analysis**, **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, 
+                and **Resume Screening**.
+
+                I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed 
+                a strong interest in **Natural Language Processing**.
+                
+                I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing**, 
+                and **Transformer-Based Models** to build smarter AI systems.
+                """
+            )
+
 
 
 # PROJECTS PAGE
