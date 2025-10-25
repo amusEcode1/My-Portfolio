@@ -58,7 +58,6 @@ pages = [
 selected = st.sidebar.radio("Navigate", pages)
 
 st.sidebar.markdown("---")
-st.sidebar.markdown("📧 [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
 st.sidebar.markdown("🔗 [LinkedIn](https://linkedin.com/in/oluyaleezekiel)")
 st.sidebar.markdown("🐙 [GitHub](https://github.com/amusEcode)")
 
@@ -80,7 +79,7 @@ else:
 if selected == "About Me":
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image("https://i.imgur.com/4ZQZ9l5.png", width=230)  # placeholder image
+        st.image("profile.jpg", width=230)
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("Machine Learning & NLP Enthusiast")
@@ -177,6 +176,7 @@ elif selected == "Contact":
         """, unsafe_allow_html=True)
     st.markdown("---")
     st.write("📞 **Phone:** +234 812 345 6789")
+    st.write("📧 **Email:** [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
     st.write("🔗 **LinkedIn:** [linkedin.com/in/oluyaleezekiel](https://linkedin.com/in/oluyaleezekiel)")
     st.write("🐙 **GitHub:** [github.com/amusEcode](https://github.com/amusEcode)")
 
