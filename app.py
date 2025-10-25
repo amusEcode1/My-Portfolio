@@ -45,7 +45,7 @@ button:hover {
 # ---------- SIDEBAR NAVIGATION ----------
 st.sidebar.image("logo.png", width=150)
 st.sidebar.title("Oluyale Ezekiel")
-st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer** 🤖")
+st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer**")
 
 pages = [
     "About Me",
