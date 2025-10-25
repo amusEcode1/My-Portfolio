@@ -161,7 +161,7 @@ elif selected == "Projects":
         {
             "title": "Question Answering System",
             "desc": "Developed a system that answers questions from context using BERT fine-tuned on the SQuAD dataset.",
-            "Tech Stack & Tools": "Python, NLTK, Transformers, , Streamlit",
+            "tech": "Python, NLTK, Transformers, , Streamlit",
             "link": "#"
         },
         {
@@ -175,8 +175,8 @@ elif selected == "Projects":
     for proj in project_data:
         st.subheader(proj["title"])
         st.write(proj["desc"])
-        st.caption(f"**Tech Used:** {proj['Tech Stack & Tools']}")
-        st.link_button("🔗 View Project", proj["link"])
+        st.caption(f"**Tech Stack & Tools:** {proj['tech']}")
+        st.link_button("🌐 View Project", proj["link"])
         st.markdown("---")
 
 # SKILLS PAGE
