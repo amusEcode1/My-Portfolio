@@ -44,7 +44,7 @@ button:hover {
 
 # ---------- SIDEBAR NAVIGATION ----------
 st.sidebar.image("logo.png", width=150)
-st.sidebar.title("Oluyale Ezekiel")
+st.sidebar.title("Ezekiel Oluyale")
 st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer**")
 
 pages = [
@@ -80,7 +80,7 @@ if selected == "About Me":
     with col1:
         st.image("profile.jpg", width=230)
     with col2:
-        st.title("👋 Hi, I'm Oluyale Ezekiel")
+        st.title("👋 Hi, I'm Ezekiel Oluyale")
         st.subheader("Machine Learning & NLP Enthusiast")
         st.write(
             """
