@@ -78,7 +78,7 @@ else:
 if selected == "About Me":
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image("profile.jpg", width=230)
+        st.image("profile.jpg", width=150)
     with col2:
         st.title("👋 Hi, I'm Ezekiel Oluyale")
         st.subheader("NLP Researcher & Machine Learning Engineer")
