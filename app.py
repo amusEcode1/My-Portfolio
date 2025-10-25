@@ -105,25 +105,70 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# -------------------- HANDLE PAGE SWITCH --------------------
-def change_page():
-    msg = st.experimental_get_query_params().get("page", ["Home"])[0]
-    st.session_state.page = msg
+# -------------------- HELPER: set/get query param safely --------------------
+def set_page_queryparam(page_name: str):
+    """Set the 'page' query parameter in the URL."""
+    st.set_query_params(page=page_name)
 
-change_page()
+def get_page_from_queryparam() -> str:
+    """Read the 'page' query param using the new API. Defaults to 'Home'."""
+    params = st.query_params  # new read-only mapping
+    page = params.get("page", ["Home"])[0] if params else "Home"
+    return page
+
+# If the app was opened without query param, ensure URL shows Home
+if not st.query_params:
+    set_page_queryparam("Home")
+
+# -------------------- HANDLE POSTMESSAGE FROM NAVBAR (browser -> streamlit) --------------------
+# This snippet listens for the window.postMessage from the custom navbar and updates query params.
+st.markdown(
+    """
+<script>
+window.addEventListener("message", (event) => {
+    try {
+        const data = event.data;
+        if (data && data.type === "streamlit:setPage") {
+            const page = data.page || "Home";
+            // update the URL query param without reloading:
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            window.history.pushState({}, '', url);
+            // Also send a message back so Streamlit can detect the change (fallback)
+            window.parent.postMessage({type:'streamlit:pageChanged'}, '*');
+        }
+    } catch(e) { /* ignore */ }
+});
+</script>
+""",
+    unsafe_allow_html=True,
+)
+
+# Small JS-based workaround to notify Streamlit to re-run after URL change
+# (Streamlit detects query params automatically on reload; this helps in some embeds)
+st.experimental_rerun() if False else None  # no-op placeholder
+
+# -------------------- SIMPLE PAGE ROUTING --------------------
+# Read page from query params and set session_state accordingly
+page = get_page_from_queryparam()
+st.session_state.page = page
 
 # -------------------- HOME PAGE --------------------
 if st.session_state.page == "Home":
     col1, col2 = st.columns([1, 1])
     with col1:
-        st.image("profile.jpg", width=300)
+        try:
+            st.image("profile.jpg", width=300)
+        except Exception:
+            st.write("Add your profile image to assets/profile.png")
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("NLP & Machine Learning Engineer")
         st.write("Building intelligent systems that understand and process human language. "
                  "I specialize in Natural Language Processing and Machine Learning applications, "
                  "from text summarization to sentiment analysis.")
-        st_lottie(lottie_home, height=250, key="home")
+        if lottie_home:
+            st_lottie(lottie_home, height=250, key="home")
         st.markdown("""
         <br>
         <a href="https://github.com/yourgithub" target="_blank">🔗 GitHub</a> |
@@ -131,13 +176,15 @@ if st.session_state.page == "Home":
         <a href="Ezekiel_Oluyale_Resume.pdf" target="_blank">📄 Resume</a>
         """, unsafe_allow_html=True)
     st.divider()
-    st.metric("Projects", "5+")
-    st.metric("Specialization", "NLP & ML")
+    cols = st.columns(2)
+    cols[0].metric("Projects", "5+")
+    cols[1].metric("Specialization", "NLP & ML")
 
 # -------------------- SKILLS PAGE --------------------
 elif st.session_state.page == "Skills":
     st.header("🧠 Skills")
-    st_lottie(lottie_skills, height=200)
+    if lottie_skills:
+        st_lottie(lottie_skills, height=200)
     st.write("### Languages")
     st.progress(90)
     st.text("Python (Advanced)")
@@ -149,7 +196,8 @@ elif st.session_state.page == "Skills":
 # -------------------- PROJECTS PAGE --------------------
 elif st.session_state.page == "Projects":
     st.header("🚀 Projects")
-    st_lottie(lottie_projects, height=200)
+    if lottie_projects:
+        st_lottie(lottie_projects, height=200)
     project_data = [
         {"title": "Yorùbá Sentiment Analyzer",
          "desc": "Classifies Yorùbá tweets as positive, negative, or neutral using transformer-based models.",
@@ -174,7 +222,8 @@ elif st.session_state.page == "Projects":
 # -------------------- EXPERIENCE PAGE --------------------
 elif st.session_state.page == "Experience":
     st.header("📚 Experience & Education")
-    st_lottie(lottie_experience, height=200)
+    if lottie_experience:
+        st_lottie(lottie_experience, height=200)
     st.write("### 🏢 Elevvo Pathways — NLP Intern")
     st.write("Worked on Named Entity Recognition, Topic Modeling, and Text Summarization systems.")
     st.write("### 🎓 Federal University of Oye-Ekiti")
@@ -185,7 +234,8 @@ elif st.session_state.page == "Experience":
 # -------------------- CONTACT PAGE --------------------
 elif st.session_state.page == "Contact":
     st.header("📞 Contact Me")
-    st_lottie(lottie_contact, height=200)
+    if lottie_contact:
+        st_lottie(lottie_contact, height=200)
     with st.form("contact_form"):
         name = st.text_input("Name")
         email = st.text_input("Email")
@@ -195,16 +245,11 @@ elif st.session_state.page == "Contact":
                 st.success("✅ Message sent successfully!")
             else:
                 st.warning("Please fill all fields.")
-    st.markdown("""
-    ---
-    📧 **Email:** oluyale.ezekiel@example.com  
-    🔗 [LinkedIn](https://linkedin.com/in/yourlinkedin) | [GitHub](https://github.com/yourgithub)
-    """)
 
 # -------------------- FOOTER --------------------
 st.markdown("""
 <hr style='margin-top:50px;'>
 <center>
-    <small>© 2025 Ezekiel Oluyale — NLP & Machine Learning Portfolio</small>
+    <small>© 2025 Oluyale Ezekiel — NLP & Machine Learning Portfolio</small>
 </center>
 """, unsafe_allow_html=True)
