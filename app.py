@@ -114,10 +114,10 @@ if selected == "About Me":
             st.markdown(
                 """
                 <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
-                    <a href="https://www.linkedin.com/in/oluyale-ezekiel" target="_blank">
+                    <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
                         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
                     </a>
-                    <a href="https://github.com/amusEcode" target="_blank">
+                    <a href="https://github.com/amusEcode1" target="_blank">
                         <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
                     </a>
                 </div>
