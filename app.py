@@ -99,7 +99,7 @@ if selected == "About Me":
         # Compact LinkedIn + GitHub buttons (same line)
         st.markdown(
             """
-            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+            <div class="social-links" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
                 <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
                     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
                 </a>
@@ -122,7 +122,7 @@ if selected == "About Me":
             # Compact LinkedIn + GitHub buttons (same line)
             st.markdown(
                 """
-                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+                <div class="social-links" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
                     <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
                         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
                     </a>
