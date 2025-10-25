@@ -22,23 +22,47 @@ contact_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_t24tpv
 # ---------- CUSTOM CSS ----------
 st.markdown("""
 <style>
+
 body {
     background-color: #f7faff;
 }
+
 h1, h2, h3, h4 {
     color: #003366;
 }
+
 img {
     border-radius: 20px;
 }
+
 button {
     background-color: #003366 !important;
     color: white !important;
     border-radius: 10px !important;
 }
+
 button:hover {
     background-color: #05c !important;
 }
+
+@media (max-width: 768px) {
+    .profile-container {
+        display: block !important;
+        text-align: center;
+    }
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-container img {
+    width: 180px;
+    border-radius: 15px;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
