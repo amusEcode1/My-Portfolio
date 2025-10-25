@@ -3,7 +3,7 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 import requests
 
-# -------------------- PAGE CONFIG --------------------
+# -------------------- CONFIG --------------------
 st.set_page_config(
     page_title="Oluyale Ezekiel | NLP & ML Portfolio",
     page_icon="🤖",
@@ -14,195 +14,186 @@ st.set_page_config(
 if "menu_open" not in st.session_state:
     st.session_state.menu_open = False
 
-# -------------------- HELPER FUNCTION --------------------
-def load_lottieurl(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+# Ensure a page query param exists
+if "page" not in st.query_params:
+    st.query_params["page"] = "Home"
 
-# -------------------- LOAD ANIMATIONS --------------------
+# -------------------- LOTTIE LOADER --------------------
+def load_lottieurl(url: str):
+    try:
+        r = requests.get(url, timeout=5)
+        if r.status_code == 200:
+            return r.json()
+    except Exception:
+        return None
+    return None
+
 lottie_home = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_yd8fbnml.json")
 lottie_skills = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json")
 lottie_projects = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_w51pcehl.json")
 lottie_experience = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_ydo1amjm.json")
 lottie_contact = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json")
 
-# -------------------- STYLE --------------------
-st.markdown("""
+# -------------------- CSS --------------------
+st.markdown(
+    """
     <style>
-        /* GENERAL */
-        body {
-            background-color: white;
-        }
-        /* NAVBAR */
-        .navbar {
-            background-color: #004aad;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 0 0 12px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-        .hamburger {
-            background: none;
-            border: none;
-            font-size: 25px;
-            color: white;
-            cursor: pointer;
-        }
+    /* NAVBAR */
+    .navbar {
+        background: #004aad;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 0 0 12px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .nav-title {
+        font-weight: 700;
+        font-size: 20px;
+    }
+    .hambutton {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 6px 10px;
+        border-radius: 8px;
+    }
+    .hambutton:hover { background: rgba(255,255,255,0.06); }
 
-        /* MENU */
-        .menu {
-            display: flex;
-            gap: 15px;
-            background-color: #004aad;
-            padding: 10px 20px;
-            border-radius: 0 0 12px 12px;
-        }
-        .menu button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .menu button:hover {
-            color: #b0d4ff;
-        }
-        .active {
-            color: #b0d4ff;
-            font-weight: bold;
-        }
+    /* Menu - by default hidden on small screens (we control visibility inline via style attr) */
+    .menu {
+        display: flex;
+        gap: 14px;
+        padding: 10px 18px;
+        background: #004aad;
+        color: white;
+        border-radius: 0 0 12px 12px;
+        flex-wrap: wrap;
+    }
+    .menu button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+    .menu button:hover { background: rgba(255,255,255,0.06); }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .menu {
-                flex-direction: column;
-            }
-        }
+    /* active style for current page */
+    .menu .active {
+        color: #bfe6ff;
+        font-weight: 700;
+    }
+
+    /* On wide screens always show the menu as a horizontal row */
+    @media (min-width: 900px) {
+        .menu { display: flex !important; }
+    }
     </style>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True,
+)
 
-# -------------------- NAVBAR --------------------
-col1, col2 = st.columns([5, 1])
+# -------------------- NAVBAR (pure Streamlit controls) --------------------
+col1, col2 = st.columns([8, 1])
 with col1:
-    st.markdown("<div class='navbar-title'>Oluyale Ezekiel</div>", unsafe_allow_html=True)
+    st.markdown("<div class='navbar'><div class='nav-title'>Oluyale Ezekiel</div></div>", unsafe_allow_html=True)
 with col2:
-    if st.button("☰", key="menu_btn", help="Toggle menu", use_container_width=True):
+    # This button toggles the menu on small screens
+    if st.button("☰", key="hamburger"):
         st.session_state.menu_open = not st.session_state.menu_open
 
-# -------------------- RESPONSIVE MENU --------------------
-# Always open on wide screens
-is_wide = st.columns([1])[0].container()._parent_width > 768 if hasattr(st, "_is_running_with_streamlit") else True
-menu_visible = st.session_state.menu_open or is_wide
+# Decide menu inline style: visible if menu_open or wide screens (CSS will force visible on wide)
+menu_style = "display:flex;" if st.session_state.menu_open else "display:none;"
 
-# Get current page
-if "page" not in st.query_params:
-    st.query_params["page"] = "Home"
-page = st.query_params["page"]
+# Render the menu div; CSS media query makes it visible automatically on wide screens
+st.markdown(f"<div class='menu' style='{menu_style}'>", unsafe_allow_html=True)
 
-if menu_visible:
-    st.markdown("<div class='menu'>", unsafe_allow_html=True)
-    menu_items = ["Home", "Skills", "Projects", "Experience", "Contact"]
-    icons = ["🏠", "🧠", "🚀", "📚", "📞"]
-    for i, name in enumerate(menu_items):
-        label = f"{icons[i]} {name}"
-        if name == page:
-            button_label = f":blue-background[{label}]"
-        else:
-            button_label = label
-        if st.button(label, key=f"nav_{name}"):
-            st.query_params["page"] = name
-            st.session_state.menu_open = False
-    st.markdown("</div>", unsafe_allow_html=True)
+# Navigation buttons (using st.button so clicks trigger a rerun and we react in Python)
+def nav_to(p):
+    st.query_params["page"] = p
+    # close menu on small screens for better UX
+    st.session_state.menu_open = False
 
-# -------------------- HOME --------------------
+current_page = st.query_params.get("page", "Home")
+
+# We use st.columns to layout the buttons inside the menu area nicely
+# But for simplicity here we render them one by one
+if st.button("🏠 Home", key="nav_home"):
+    nav_to("Home")
+if st.button("🧠 Skills", key="nav_skills"):
+    nav_to("Skills")
+if st.button("🚀 Projects", key="nav_projects"):
+    nav_to("Projects")
+if st.button("📚 Experience", key="nav_experience"):
+    nav_to("Experience")
+if st.button("📞 Contact", key="nav_contact"):
+    nav_to("Contact")
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# After rendering menu and possible clicks, read the current page and render content
+page = st.query_params.get("page", "Home")
+
+# -------------------- PAGES --------------------
 if page == "Home":
     col1, col2 = st.columns([1, 1])
     with col1:
         try:
             st.image("assets/profile.png", width=300)
-        except:
-            st.warning("⚠️ Add your profile image to `assets/profile.png`.")
+        except Exception:
+            st.warning("Add your profile image at assets/profile.png")
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("NLP & Machine Learning Engineer")
-        st.write("""
-        I build intelligent systems that process and understand human language.  
-        My focus areas are **Natural Language Processing (NLP)** and **Machine Learning (ML)** — 
-        from Sentiment Analysis to Text Summarization and beyond.
-        """)
+        st.write(
+            "I build intelligent systems that process and understand human language. "
+            "My work spans Text Summarization, Sentiment Analysis, NER, and transformer fine-tuning."
+        )
         if lottie_home:
-            st_lottie(lottie_home, height=250)
+            st_lottie(lottie_home, height=260)
     st.divider()
-    col1, col2 = st.columns(2)
-    col1.metric("Projects", "5+")
-    col2.metric("Specialization", "NLP & ML")
+    c1, c2 = st.columns(2)
+    c1.metric("Projects", "5+")
+    c2.metric("Focus", "NLP & ML")
 
-# -------------------- SKILLS --------------------
 elif page == "Skills":
     st.header("🧠 Skills")
     if lottie_skills:
-        st_lottie(lottie_skills, height=200)
-    st.subheader("Languages")
-    st.text("Python (Advanced)")
-    st.subheader("Frameworks & Libraries")
-    st.text("Transformers · PyTorch · scikit-learn · NumPy · Pandas")
-    st.subheader("Tools & Platforms")
-    st.text("Streamlit · Hugging Face · Git · Jupyter Notebook")
+        st_lottie(lottie_skills, height=220)
+    st.subheader("Languages & Libraries")
+    st.write("- Python\n- NumPy, Pandas\n- scikit-learn\n- Transformers (Hugging Face)\n- spaCy, NLTK")
+    st.subheader("Tools")
+    st.write("- Streamlit, Git, Hugging Face Hub, Jupyter")
 
-# -------------------- PROJECTS --------------------
 elif page == "Projects":
     st.header("🚀 Projects")
     if lottie_projects:
         st_lottie(lottie_projects, height=200)
-    projects = [
-        {
-            "title": "Yorùbá Sentiment Analyzer",
-            "desc": "Classifies Yorùbá tweets as positive, negative, or neutral using transformer models.",
-            "tech": "Python · BERT · NLP",
-        },
-        {
-            "title": "Text Summarizer",
-            "desc": "Abstractive summarization using transformer models fine-tuned on news datasets.",
-            "tech": "Python · Hugging Face · Streamlit",
-        },
-        {
-            "title": "Topic Modeling",
-            "desc": "Discovers hidden themes in documents using LDA and NMF.",
-            "tech": "Python · scikit-learn · NLP",
-        },
-    ]
-    for p in projects:
-        st.subheader(p["title"])
-        st.write(p["desc"])
-        st.write(f"**Tech Stack:** {p['tech']}")
-        st.divider()
+    st.subheader("Yorùbá Sentiment Analyzer")
+    st.write("Classifies Yorùbá tweets as Positive / Negative / Neutral using transformer models.")
+    st.divider()
+    st.subheader("Abstractive Text Summarizer")
+    st.write("Fine-tuned transformer-based abstractive summarizer.")
+    st.divider()
+    st.subheader("Topic Modeling Dashboard")
+    st.write("Interactive LDA & NMF topic modeling exploration.")
 
-# -------------------- EXPERIENCE --------------------
 elif page == "Experience":
     st.header("📚 Experience & Education")
     if lottie_experience:
         st_lottie(lottie_experience, height=200)
-    st.subheader("🏢 Elevvo Pathways — NLP Intern")
-    st.write("""
-    Worked on Named Entity Recognition, Topic Modeling, and Summarization projects  
-    using transformer-based models and text preprocessing pipelines.
-    """)
-    st.subheader("🎓 Federal University of Oye-Ekiti")
-    st.write("Bachelor of Engineering (B.Eng) in Computer Engineering")
-    st.subheader("🎯 Research Interests")
-    st.write("Multilingual NLP, Transformer optimization, and applied ML.")
+    st.write("🏢 Elevvo Pathways — NLP Intern (Jun 2025 - Oct 2025)")
+    st.write("🎓 Federal University of Oye-Ekiti — B.Eng")
+    st.write("Research interests: low-resource language NLP, model efficiency, explainability.")
 
-# -------------------- CONTACT --------------------
 elif page == "Contact":
-    st.header("📞 Contact Me")
+    st.header("📞 Contact")
     if lottie_contact:
         st_lottie(lottie_contact, height=200)
     with st.form("contact_form"):
@@ -211,14 +202,10 @@ elif page == "Contact":
         message = st.text_area("Message")
         if st.form_submit_button("Send"):
             if name and email and message:
-                st.success("✅ Message sent successfully!")
+                st.success("Message received (demo).")
             else:
-                st.warning("Please fill all fields before sending.")
+                st.warning("Please fill all fields.")
 
 # -------------------- FOOTER --------------------
-st.markdown("""
-<hr style='margin-top:50px;'>
-<center>
-    <small>© 2025 Oluyale Ezekiel — NLP & Machine Learning Portfolio</small>
-</center>
-""", unsafe_allow_html=True)
+st.markdown("---")
+st.markdown("<div style='text-align:center;color:#6b859e;'>Built with Streamlit • Blue & White theme</div>", unsafe_allow_html=True)
