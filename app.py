@@ -153,15 +153,15 @@ elif selected == "Projects":
     st.header("🚀 Featured NLP Projects")
     project_data = [
         {
-            "title": "Text Summarization App",
-            "desc": "Built an abstractive summarization app using fine-tuned transformer models to generate concise summaries.",
-            "tech": "Python, Hugging Face, Streamlit",
-            "link": "https://github.com/amusEcode/summarizer_model"
+            "title": "Text Summarization",
+            "desc": "An Abstractive and Extractive summarization app that generates concise summaries from long articles using pre-trained transformer model (T5) fine-tuned on the CNN/DailyMail Dataset.",
+            "Tech Stack & Tools": "Python, NLTK, spaCy, BeautifulSoup4, pytextrank, Datasets, rouge-score, Transformers, Streamlit",
+            "link": "https://concise-ai.streamlit.app"
         },
         {
             "title": "Question Answering System",
             "desc": "Developed a system that answers questions from context using BERT fine-tuned on the SQuAD dataset.",
-            "tech": "Transformers, Python, Streamlit",
+            "Tech Stack & Tools": "Python, NLTK, Transformers, , Streamlit",
             "link": "#"
         },
         {
