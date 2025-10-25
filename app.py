@@ -56,7 +56,6 @@ st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer**")
 pages = [
     "About Me",
     "Projects",
-    "Skills",
     "Contact"
 ]
 selected = st.sidebar.radio("Navigate", pages)
@@ -201,21 +200,6 @@ elif selected == "Projects":
         st.caption(f"**Tech Stack & Tools:** {proj['tech']}")
         st.link_button("🌐 View Project", proj["link"])
         st.markdown("---")
-
-# SKILLS PAGE
-elif selected == "Skills":
-    st.header("🧠 Skills & Tools")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown("**Programming:** Python, JavaScript")
-        st.markdown("**ML Frameworks:** PyTorch, scikit-learn")
-    with col2:
-        st.markdown("**NLP Libraries:** SpaCy, NLTK, Transformers")
-        st.markdown("**Tools:** Streamlit, Hugging Face, Git")
-    with col3:
-        st.markdown("**Concepts:** Tokenization, Embeddings, Fine-tuning, Topic Modeling")
-    st.markdown("---")
-    st.success("Always learning — expanding into Multilingual NLP & LLM fine-tuning.")
 
 # CONTACT PAGE
 elif selected == "Contact":
