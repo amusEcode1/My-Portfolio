@@ -54,7 +54,7 @@ pages = [
     "Experience",
     "Contact"
 ]
-selected = st.sidebar.radio("Navigate", pages)
+selected = st.sidebar.radio("Navigate", pages, color='blue')
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("🔗 [LinkedIn](https://www.linkedin.com/in/ezekiel-oluyale)")
