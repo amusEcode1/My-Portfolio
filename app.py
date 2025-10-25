@@ -17,7 +17,7 @@ def load_lottieurl(url: str):
         return None
     return r.json()
 
-# Example Lottie URLs (replace with others if you wish)
+# Example Lottie URLs (you can replace with your favorites)
 lottie_home = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_yd8fbnml.json")
 lottie_skills = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json")
 lottie_projects = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_w51pcehl.json")
@@ -27,49 +27,57 @@ lottie_contact = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_
 # -------------------- NAVBAR STYLE --------------------
 st.markdown("""
     <style>
+        /* NAVBAR BASE */
         .topnav {
             background-color: #004aad;
             overflow: hidden;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 0 0 12px 12px;
+            position: relative;
+            z-index: 10;
         }
-        .topnav a {
-            float: left;
+        .topnav-title {
             color: white;
-            text-align: center;
-            padding: 10px 16px;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: 500;
-        }
-        .topnav a:hover {
-            background-color: #0056d1;
-            color: #fff;
-            border-radius: 8px;
+            font-size: 20px;
+            font-weight: 600;
+            margin-left: 10px;
+            display: inline-block;
         }
         .hamburger {
-            font-size: 22px;
+            font-size: 24px;
             cursor: pointer;
             color: white;
-            padding: 0 16px;
-            float: left;
+            background: none;
+            border: none;
+            float: right;
         }
+
+        /* MENU STYLING */
         .menu {
             display: none;
             flex-direction: column;
             background-color: #004aad;
             border-radius: 0 0 10px 10px;
+            animation: slideDown 0.4s ease;
+            overflow: hidden;
         }
         .menu a {
             color: white;
-            padding: 10px 16px;
+            padding: 12px 18px;
             text-decoration: none;
             font-size: 16px;
             text-align: left;
+            transition: background-color 0.3s ease;
         }
         .menu a:hover {
             background-color: #0056d1;
             border-radius: 6px;
+        }
+
+        /* SLIDE ANIMATION */
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 """, unsafe_allow_html=True)
@@ -78,11 +86,12 @@ st.markdown("""
 st.markdown("""
 <script>
 function toggleMenu() {
-    var menu = window.parent.document.querySelector('.menu');
+    var menu = window.document.querySelector('.menu');
     if (menu.style.display === 'flex') {
         menu.style.display = 'none';
     } else {
         menu.style.display = 'flex';
+        menu.style.animation = 'slideDown 0.4s ease';
     }
 }
 </script>
@@ -91,8 +100,8 @@ function toggleMenu() {
 # -------------------- NAVBAR HTML --------------------
 st.markdown("""
 <div class="topnav">
-    <span class="hamburger" onclick="toggleMenu()">☰</span>
-    <a style="font-size:18px;font-weight:600;">Oluyale Ezekiel</a>
+    <span class="topnav-title">Oluyale Ezekiel</span>
+    <button class="hamburger" onclick="toggleMenu()">☰</button>
 </div>
 <div class="menu">
     <a href="?page=Home">🏠 Home</a>
@@ -105,7 +114,7 @@ st.markdown("""
 
 # -------------------- HELPER: SET/GET PAGE --------------------
 def get_page():
-    """Return current active page from query parameters."""
+    """Return the current active page from query parameters."""
     if "page" in st.query_params:
         return st.query_params["page"]
     else:
