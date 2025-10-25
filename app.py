@@ -89,7 +89,7 @@ else:
 
 # ABOUT ME PAGE
 if selected == "About Me":
-    is_mobile = st.session_state.get("is_mobile", False)
+    is_mobile = st.session_state.get("is_mobile", True)
 
     if is_mobile:
         col1, col2 = st.columns([1, 2])
