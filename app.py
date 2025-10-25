@@ -28,47 +28,63 @@ lottie_projects = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20
 lottie_experience = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_ydo1amjm.json")
 lottie_contact = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json")
 
-# -------------------- NAVBAR STYLING --------------------
+# -------------------- STYLE --------------------
 st.markdown("""
     <style>
+        /* GENERAL */
+        body {
+            background-color: white;
+        }
+        /* NAVBAR */
         .navbar {
             background-color: #004aad;
-            padding: 10px 25px;
+            color: white;
+            padding: 12px 25px;
             border-radius: 0 0 12px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .navbar-title {
-            color: white;
             font-size: 20px;
             font-weight: 600;
         }
         .hamburger {
-            color: white;
             background: none;
             border: none;
             font-size: 25px;
+            color: white;
             cursor: pointer;
         }
+
+        /* MENU */
         .menu {
-            background-color: #004aad;
             display: flex;
-            flex-direction: column;
-            margin-top: 5px;
+            gap: 15px;
+            background-color: #004aad;
+            padding: 10px 20px;
             border-radius: 0 0 12px 12px;
         }
         .menu button {
             background: none;
             border: none;
             color: white;
-            text-align: left;
-            padding: 10px 25px;
             font-size: 16px;
             cursor: pointer;
         }
         .menu button:hover {
-            background-color: #0056d1;
+            color: #b0d4ff;
+        }
+        .active {
+            color: #b0d4ff;
+            font-weight: bold;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+            }
         }
     </style>
 """, unsafe_allow_html=True)
@@ -81,45 +97,46 @@ with col2:
     if st.button("☰", key="menu_btn", help="Toggle menu", use_container_width=True):
         st.session_state.menu_open = not st.session_state.menu_open
 
-# -------------------- MENU --------------------
-if st.session_state.menu_open:
-    st.markdown("<div class='menu'>", unsafe_allow_html=True)
-    if st.button("🏠 Home"):
-        st.query_params["page"] = "Home"
-        st.session_state.menu_open = False
-    if st.button("🧠 Skills"):
-        st.query_params["page"] = "Skills"
-        st.session_state.menu_open = False
-    if st.button("🚀 Projects"):
-        st.query_params["page"] = "Projects"
-        st.session_state.menu_open = False
-    if st.button("📚 Experience"):
-        st.query_params["page"] = "Experience"
-        st.session_state.menu_open = False
-    if st.button("📞 Contact"):
-        st.query_params["page"] = "Contact"
-        st.session_state.menu_open = False
-    st.markdown("</div>", unsafe_allow_html=True)
+# -------------------- RESPONSIVE MENU --------------------
+# Always open on wide screens
+is_wide = st.columns([1])[0].container()._parent_width > 768 if hasattr(st, "_is_running_with_streamlit") else True
+menu_visible = st.session_state.menu_open or is_wide
 
-# -------------------- GET ACTIVE PAGE --------------------
+# Get current page
 if "page" not in st.query_params:
     st.query_params["page"] = "Home"
 page = st.query_params["page"]
 
-# -------------------- HOME PAGE --------------------
+if menu_visible:
+    st.markdown("<div class='menu'>", unsafe_allow_html=True)
+    menu_items = ["Home", "Skills", "Projects", "Experience", "Contact"]
+    icons = ["🏠", "🧠", "🚀", "📚", "📞"]
+    for i, name in enumerate(menu_items):
+        label = f"{icons[i]} {name}"
+        if name == page:
+            button_label = f":blue-background[{label}]"
+        else:
+            button_label = label
+        if st.button(label, key=f"nav_{name}"):
+            st.query_params["page"] = name
+            st.session_state.menu_open = False
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# -------------------- HOME --------------------
 if page == "Home":
     col1, col2 = st.columns([1, 1])
     with col1:
         try:
             st.image("profile.jpg", width=300)
         except:
-            st.warning("⚠️ Add your photo in `profile.jpg`.")
+            st.warning("⚠️ Add your profile image to `profile.jpg`.")
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("NLP & Machine Learning Engineer")
         st.write("""
         I build intelligent systems that process and understand human language.  
-        My focus areas are **Natural Language Processing** and **Machine Learning** — from Sentiment Analysis to Text Summarization.
+        My focus areas are **Natural Language Processing (NLP)** and **Machine Learning (ML)** — 
+        from Sentiment Analysis to Text Summarization and beyond.
         """)
         if lottie_home:
             st_lottie(lottie_home, height=250)
@@ -128,19 +145,19 @@ if page == "Home":
     col1.metric("Projects", "5+")
     col2.metric("Specialization", "NLP & ML")
 
-# -------------------- SKILLS PAGE --------------------
+# -------------------- SKILLS --------------------
 elif page == "Skills":
     st.header("🧠 Skills")
     if lottie_skills:
         st_lottie(lottie_skills, height=200)
-    st.write("### Languages")
+    st.subheader("Languages")
     st.text("Python (Advanced)")
-    st.write("### Frameworks & Libraries")
+    st.subheader("Frameworks & Libraries")
     st.text("Transformers · PyTorch · scikit-learn · NumPy · Pandas")
-    st.write("### Tools & Platforms")
-    st.text("Streamlit · Hugging Face · Git · Jupyter")
+    st.subheader("Tools & Platforms")
+    st.text("Streamlit · Hugging Face · Git · Jupyter Notebook")
 
-# -------------------- PROJECTS PAGE --------------------
+# -------------------- PROJECTS --------------------
 elif page == "Projects":
     st.header("🚀 Projects")
     if lottie_projects:
@@ -168,22 +185,22 @@ elif page == "Projects":
         st.write(f"**Tech Stack:** {p['tech']}")
         st.divider()
 
-# -------------------- EXPERIENCE PAGE --------------------
+# -------------------- EXPERIENCE --------------------
 elif page == "Experience":
     st.header("📚 Experience & Education")
     if lottie_experience:
         st_lottie(lottie_experience, height=200)
-    st.write("### 🏢 Elevvo Pathways — NLP Intern")
+    st.subheader("🏢 Elevvo Pathways — NLP Intern")
     st.write("""
     Worked on Named Entity Recognition, Topic Modeling, and Summarization projects  
-    using transformer-based models and preprocessing pipelines.
+    using transformer-based models and text preprocessing pipelines.
     """)
-    st.write("### 🎓 Federal University of Oye-Ekiti")
+    st.subheader("🎓 Federal University of Oye-Ekiti")
     st.write("Bachelor of Engineering (B.Eng) in Computer Engineering")
-    st.write("### 🎯 Research Interests")
-    st.write("Multilingual NLP, Transformer optimization, Applied ML.")
+    st.subheader("🎯 Research Interests")
+    st.write("Multilingual NLP, Transformer optimization, and applied ML.")
 
-# -------------------- CONTACT PAGE --------------------
+# -------------------- CONTACT --------------------
 elif page == "Contact":
     st.header("📞 Contact Me")
     if lottie_contact:
