@@ -85,13 +85,68 @@ if os.path.exists(cv_path):
 else:
     st.sidebar.warning("⚠️ CV not found. Upload it later.")
 
+# --- Detect screen size using JavaScript ---
+st.markdown(
+    """
+    <script>
+    const isMobile = window.innerWidth < 768;
+    window.parent.postMessage({isMobile}, "*");
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
+# --- Listen for message and update session_state ---
+if "is_mobile" not in st.session_state:
+    st.session_state["is_mobile"] = False
+
+st.markdown(
+    """
+    <script>
+    window.addEventListener("message", (event) => {
+        const data = event.data;
+        if (data && data.isMobile !== undefined) {
+            window.streamlitWebSocket.sendMessage(JSON.stringify({
+                type: "streamlit:setComponentValue",
+                key: "is_mobile",
+                value: data.isMobile
+            }));
+        }
+    });
+    </script>
+    """,
+    unsafe_allow_html=True
+)
+
 # ---------- PAGE CONTENT ----------
 
 # ABOUT ME PAGE
-if selected == "About Me":
+if "selected" not in st.session_state:
+    st.session_state["selected"] = "About Me"
+
+if st.session_state["selected"] == "About Me":
     is_mobile = st.session_state.get("is_mobile", False)
 
     if is_mobile:
+        st.image("profile.jpg", width=200)
+        st.title("👋 Hi, I'm Ezekiel Oluyale")
+        st.subheader("NLP Researcher & Machine Learning Engineer")
+
+        st.markdown(
+            """
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+                <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
+                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
+                </a>
+                <a href="https://github.com/amusEcode1" target="_blank">
+                    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white">
+                </a>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    else:
         col1, col2 = st.columns([1, 2])
         with col1:
             st.image("profile.jpg", width=200)
@@ -99,38 +154,14 @@ if selected == "About Me":
             st.title("👋 Hi, I'm Ezekiel Oluyale")
             st.subheader("NLP Researcher & Machine Learning Engineer")
 
-            # Compact LinkedIn + GitHub buttons (same line)
             st.markdown(
                 """
-                <div class="social-links" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
                     <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
-                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white">
                     </a>
                     <a href="https://github.com/amusEcode1" target="_blank">
-                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-                    </a>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-            
-    else:    
-        col1, col2 = st.columns([1, 2])
-        with col1:
-            st.image("profile.jpg", width=200)
-        with col2:
-            st.title("👋 Hi, I'm Ezekiel Oluyale")
-            st.subheader("NLP Researcher & Machine Learning Engineer")
-
-            # Compact LinkedIn + GitHub buttons (same line)
-            st.markdown(
-                """
-                <div class="social-links" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
-                    <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
-                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-                    </a>
-                    <a href="https://github.com/amusEcode1" target="_blank">
-                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white">
                     </a>
                 </div>
                 """,
@@ -145,12 +176,13 @@ if selected == "About Me":
         My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
         **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, and **Resume Screening**.
         
-        I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed a strong interest in **Natural Language Processing**. 
+        I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed a strong interest in **Natural Language Processing**.
         
         I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing** and **Transformer-Based Models**
         to build smarter AI systems.
         """
-        )
+    )
+
 
 # PROJECTS PAGE
 elif selected == "Projects":
