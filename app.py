@@ -92,25 +92,28 @@ if selected == "About Me":
     is_mobile = st.session_state.get("is_mobile", False)
 
     if is_mobile:
-        st.image("profile.jpg", width=200)
-        st.title("👋 Hi, I'm Ezekiel Oluyale")
-        st.subheader("NLP Researcher & Machine Learning Engineer")
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image("profile.jpg", width=200)
+        with col2:
+            st.title("👋 Hi, I'm Ezekiel Oluyale")
+            st.subheader("NLP Researcher & Machine Learning Engineer")
 
-        # Compact LinkedIn + GitHub buttons (same line)
-        st.markdown(
-            """
-            <div class="social-links" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
-                <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
-                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-                </a>
-                <a href="https://github.com/amusEcode1" target="_blank">
-                    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-                </a>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
+            # Compact LinkedIn + GitHub buttons (same line)
+            st.markdown(
+                """
+                <div class="social-links" style="display: flex; gap: 10px; align-items: center; margin-bottom: 20px;">
+                    <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
+                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+                    </a>
+                    <a href="https://github.com/amusEcode1" target="_blank">
+                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+                    </a>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            
     else:    
         col1, col2 = st.columns([1, 2])
         with col1:
