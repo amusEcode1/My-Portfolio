@@ -38,9 +38,54 @@ button {
     border-radius: 10px !important;
 }
 button:hover {
-    background-color: #05c !important;
+    background-color: #0055cc !important;
+}
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* ---------- HAMBURGER TOGGLE ---------- */
+#hamburger {
+    position: fixed;
+    top: 15px;
+    left: 25px;
+    z-index: 999;
+    font-size: 28px;
+    cursor: pointer;
+    color: #003366;
+    transition: 0.3s;
+}
+#hamburger:hover {
+    color: #0055cc;
+}
+.sidebar-content {
+    display: none;
+    transition: 0.5s ease-in-out;
+}
+.show-sidebar .sidebar-content {
+    display: block;
 }
 </style>
+""", unsafe_allow_html=True)
+
+# ---------- HAMBURGER ICON ----------
+st.markdown("<div id='hamburger'>&#9776;</div>", unsafe_allow_html=True)
+
+# ---------- JAVASCRIPT TOGGLE ----------
+st.markdown("""
+<script>
+const hamburger = window.parent.document.querySelector("#hamburger");
+const sidebar = window.parent.document.querySelector(".css-1d391kg");  // sidebar element
+if (hamburger && sidebar) {
+  hamburger.addEventListener("click", () => {
+    if (sidebar.style.transform === "translateX(-100%)") {
+      sidebar.style.transform = "translateX(0%)";
+    } else {
+      sidebar.style.transform = "translateX(-100%)";
+    }
+  });
+}
+</script>
 """, unsafe_allow_html=True)
 
 # ---------- SIDEBAR NAVIGATION ----------
@@ -48,13 +93,7 @@ st.sidebar.image("https://i.imgur.com/8Km9tLL.png", width=150)
 st.sidebar.title("Oluyale Ezekiel")
 st.sidebar.markdown("**NLP & ML Enthusiast** 🤖")
 
-pages = [
-    "About Me",
-    "Projects",
-    "Skills",
-    "Experience",
-    "Contact"
-]
+pages = ["About Me", "Projects", "Skills", "Experience", "Contact"]
 selected = st.sidebar.radio("Navigate", pages)
 
 st.sidebar.markdown("---")
@@ -75,31 +114,26 @@ else:
     st.sidebar.warning("⚠️ CV not found. Upload it later.")
 
 # ---------- PAGE CONTENT ----------
-
-# ABOUT ME PAGE
 if selected == "About Me":
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image("https://i.imgur.com/4ZQZ9l5.png", width=230)  # placeholder image
+        st.image("https://i.imgur.com/4ZQZ9l5.png", width=230)
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("Machine Learning & NLP Enthusiast")
-        st.write(
-            """
-            I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
-            smarter and more accessible.  
-            
-            My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like 
-            **Text Summarization**, **Question Answering**, **Named Entity Recognition**, and **Sentiment Analysis**.
-            
-            I enjoy turning raw data into real insights, and I’m currently expanding into **multilingual NLP** and 
-            **transformer-based systems**.
-            """
-        )
+        st.write("""
+        I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
+        smarter and more accessible.  
+
+        My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like 
+        **Text Summarization**, **Question Answering**, **Named Entity Recognition**, and **Sentiment Analysis**.
+
+        I enjoy turning raw data into real insights, and I’m currently expanding into **multilingual NLP** and 
+        **transformer-based systems**.
+        """)
     st.markdown("---")
     st_lottie(nlp_anim, height=250, key="nlp")
 
-# PROJECTS PAGE
 elif selected == "Projects":
     st.header("🚀 Featured NLP Projects")
     project_data = [
@@ -130,7 +164,6 @@ elif selected == "Projects":
         st.link_button("🔗 View Project", proj["link"])
         st.markdown("---")
 
-# SKILLS PAGE
 elif selected == "Skills":
     st.header("🧠 Skills & Tools")
     col1, col2, col3 = st.columns(3)
@@ -145,22 +178,18 @@ elif selected == "Skills":
     st.markdown("---")
     st.success("Always learning — expanding into Multilingual NLP & LLM fine-tuning.")
 
-# EXPERIENCE PAGE
 elif selected == "Experience":
     st.header("💼 Experience")
     st.subheader("NLP Intern — Elevvo Pathways (Remote)")
-    st.write(
-        """
-        During my internship at **Elevvo Pathways**, I developed and deployed **8 end-to-end NLP projects** applying real-world
-        concepts like text preprocessing, model fine-tuning, and evaluation.  
-        
-        My tasks spanned multiple domains — from **Named Entity Recognition** to **Topic Modeling**, **Summarization**, and 
-        **Sentiment Analysis** — helping me transition from learner to hands-on NLP practitioner.
-        """
-    )
+    st.write("""
+    During my internship at **Elevvo Pathways**, I developed and deployed **8 end-to-end NLP projects** applying real-world
+    concepts like text preprocessing, model fine-tuning, and evaluation.  
+    
+    My tasks spanned multiple domains — from **Named Entity Recognition** to **Topic Modeling**, **Summarization**, and 
+    **Sentiment Analysis** — helping me transition from learner to hands-on NLP practitioner.
+    """)
     st.caption("Jan 2025 – Oct 2025 | Remote Internship")
 
-# CONTACT PAGE
 elif selected == "Contact":
     st.header("📬 Get In Touch")
     col1, col2 = st.columns([1, 1])
@@ -180,7 +209,6 @@ elif selected == "Contact":
     st.write("🔗 **LinkedIn:** [linkedin.com/in/oluyaleezekiel](https://linkedin.com/in/oluyaleezekiel)")
     st.write("🐙 **GitHub:** [github.com/amusEcode](https://github.com/amusEcode)")
 
-# FOOTER
 st.markdown("---")
 st.markdown(
     "<p style='text-align:center; color:#666;'>© 2025 Oluyale Ezekiel | Built with ❤️ using Streamlit</p>",
