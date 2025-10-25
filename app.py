@@ -5,7 +5,7 @@ import os
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
-    page_title="Oluyale Ezekiel | NLP & ML Portfolio",
+    page_title="Ezekiel Oluyale Portfolio",
     page_icon="logo.png",
     layout="wide"
 )
