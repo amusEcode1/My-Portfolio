@@ -45,24 +45,6 @@ button:hover {
     background-color: #05c !important;
 }
 
-@media (max-width: 768px) {
-    .profile-container {
-        display: block !important;
-        text-align: center;
-    }
-}
-
-.profile-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.profile-container img {
-    width: 180px;
-    border-radius: 15px;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
