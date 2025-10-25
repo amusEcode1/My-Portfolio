@@ -44,7 +44,7 @@ button:hover {
 """, unsafe_allow_html=True)
 
 # ---------- SIDEBAR NAVIGATION ----------
-st.sidebar.image("https://i.imgur.com/8Km9tLL.png", width=150)
+st.sidebar.image("logo.jpg", width=150)
 st.sidebar.title("Oluyale Ezekiel")
 st.sidebar.markdown("**NLP & ML Enthusiast** 🤖")
 
