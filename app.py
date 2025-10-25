@@ -94,7 +94,6 @@ if selected == "About Me":
             **transformer-based systems**.
             """
         )
-    st.markdown("---")
 
 # PROJECTS PAGE
 elif selected == "Projects":
