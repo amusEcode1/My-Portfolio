@@ -111,9 +111,9 @@ if page == "Home":
     col1, col2 = st.columns([1, 1])
     with col1:
         try:
-            st.image("assets/profile.png", width=300)
+            st.image("profile.jpg", width=300)
         except:
-            st.warning("⚠️ Add your photo in `assets/profile.png`.")
+            st.warning("⚠️ Add your photo in `profile.jpg`.")
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("NLP & Machine Learning Engineer")
