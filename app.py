@@ -218,21 +218,6 @@ elif selected == "Skills":
     st.markdown("---")
     st.success("Always learning — expanding into Multilingual NLP & LLM fine-tuning.")
 
-# EXPERIENCE PAGE
-elif selected == "Experience":
-    st.header("💼 Experience")
-    st.subheader("NLP Intern — Elevvo Pathways (Remote)")
-    st.write(
-        """
-        During my internship at **Elevvo Pathways**, I developed and deployed **8 end-to-end NLP projects** applying real-world
-        concepts like text preprocessing, model fine-tuning, and evaluation.  
-        
-        My tasks spanned multiple domains — from **Named Entity Recognition** to **Topic Modeling**, **Summarization**, and 
-        **Sentiment Analysis** — helping me transition from learner to hands-on NLP practitioner.
-        """
-    )
-    st.caption("Jan 2025 – Oct 2025 | Remote Internship")
-
 # CONTACT PAGE
 elif selected == "Contact":
     st.header("📬 Get In Touch")
