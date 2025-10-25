@@ -129,7 +129,7 @@ if selected == "About Me":
 
     st.write(
         """
-        I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
+        <br>I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
         smarter and more accessible.  
             
         My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
