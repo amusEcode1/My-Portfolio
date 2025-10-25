@@ -45,15 +45,6 @@ button:hover {
     background-color: #05c !important;
 }
 
-.social-links a img {
-            transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.social-links a img:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-}
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -156,8 +147,6 @@ if selected == "About Me":
                 and **Transformer-Based Models** to build smarter AI systems.
                 """
             )
-
-
 
 # PROJECTS PAGE
 elif selected == "Projects":
