@@ -140,7 +140,7 @@ if selected == "About Me":
                 **Sentiment Analysis**, **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, 
                 and **Resume Screening**.
 
-                I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed 
+                I hold a First-Class Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed 
                 a strong interest in **Natural Language Processing**.
                 
                 I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing**, 
@@ -152,23 +152,47 @@ if selected == "About Me":
 elif selected == "Projects":
     st.header("🚀 Featured NLP Projects")
     project_data = [
-        {
-            "title": "Text Summarization",
-            "desc": "An Abstractive and Extractive summarization app that generates concise summaries from long articles using pre-trained transformer model (T5) fine-tuned on the CNN/DailyMail Dataset.",
-            "tech": "Python, NLTK, spaCy, BeautifulSoup4, pytextrank, Datasets, rouge-score, Transformers, Streamlit",
-            "link": "https://concise-ai.streamlit.app"
+         {
+            "title": "Product Review — Sentiment Analysis",
+            "desc": "A Sentiment Analysis System using the IMDb reviews dataset to classify product reviews as positive or negative.",
+            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, NLTK, Scikit-learn, Streamlt, Colab",
+            "link": "https://reviewpredictor.streamlit.app/"
         },
-        {
-            "title": "Question Answering System",
-            "desc": "Developed a system that answers questions from context using BERT fine-tuned on the SQuAD dataset.",
-            "tech": "Python, NLTK, Transformers, , Streamlit",
-            "link": "#"
+         {
+            "title": "Fake News Detection System",
+            "desc": "A Fake News Detection System using the Fake and Real News dataset designed to detect fake news by classifying news articles as real or fake.",
+            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, spaCy, Scikit-learn, Streamlt, Colab",
+            "link": "https://news-verifier.streamlit.app/"
         },
-        {
+         {
             "title": "Named Entity Recognition",
-            "desc": "Implemented a custom model for identifying entities such as people, organizations, and places in text.",
-            "tech": "SpaCy, Rule-based Matching",
-            "link": "#"
+            "desc": "A Named Entity Recognition (NER) System for News Articles using the CoNLL003 dataset to automatically extract and categorize entities like people, locations, organizations, et.c from real-world text.",
+            "tech": "Python, Pandas, spaCy, Streamlt, Colab",
+            "link": "https://named-entity-extraction-news.streamlit.app/"
+        },
+         {
+            "title": "Topic Modelling System",
+            "desc": "A Topic Modeling System for News Articles using the BBC News Dataset to discover hidden topics or themes in a collection of News Articles or Blog posts.",
+            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, NLTK, Scikit-learn, pyLDAvis, Streamlit, Colab",
+            "link": "https://news-articles-modelling.streamlit.app/"
+        },
+         {
+            "title": "Question Answering System",
+            "desc": "A Question Answering System that answers questions based on a given passage or context using pre-trained transformer models fine-tuned on the Stanford Question Answering dataset",
+            "tech": "Python, Pandas, PyTorch, Evaluate, Transformers, Streamlit, Colab",
+            "link": "https://ask-me-ai.streamlit.app/"
+        },
+         {
+            "title": "Text Summarization App",
+            "desc": "An Abstractive and Extractive summarization app that generates concise summaries from long articles using pre-trained transformer model (T5) fine-tuned on the CNN/DailyMail Dataset.",
+            "tech": "Python, Pandas, NLTK, spaCy, BeautifulSoup4, pytextrank, Datasets, rouge-score, Transformers, Streamlit, Colab",
+            "link": "https://concise-ai.streamlit.app/"
+        },
+         {
+            "title": "Resume Screening & Matching System",
+            "desc": "A Resume Screening System that screen and rank resumes based on Job descriptions using both Resume and Job Dataset.",
+            "tech": "Python, Pandas, NumPy, Sentence-Transformers, BeautifulSoup4, pdfplumber, python-docs, tqdm, spaCy, Streamlit, Colab",
+            "link": "https://resume-qualify.streamlit.app/"
         }
     ]
 
