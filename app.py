@@ -57,7 +57,6 @@ pages = [
     "About Me",
     "Projects",
     "Skills",
-    "Experience",
     "Contact"
 ]
 selected = st.sidebar.radio("Navigate", pages)
