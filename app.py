@@ -10,118 +10,101 @@ st.set_page_config(
     layout="wide",
 )
 
-# -------------------- LOAD LOTTIE ANIMATION --------------------
+# -------------------- SESSION STATE --------------------
+if "menu_open" not in st.session_state:
+    st.session_state.menu_open = False
+
+# -------------------- HELPER FUNCTION --------------------
 def load_lottieurl(url: str):
     r = requests.get(url)
     if r.status_code != 200:
         return None
     return r.json()
 
-# Example Lottie URLs (you can replace with your favorites)
+# -------------------- LOAD ANIMATIONS --------------------
 lottie_home = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_yd8fbnml.json")
 lottie_skills = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_tfb3estd.json")
 lottie_projects = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_w51pcehl.json")
 lottie_experience = load_lottieurl("https://assets9.lottiefiles.com/packages/lf20_ydo1amjm.json")
 lottie_contact = load_lottieurl("https://assets10.lottiefiles.com/packages/lf20_jcikwtux.json")
 
-# -------------------- NAVBAR STYLE --------------------
+# -------------------- NAVBAR STYLING --------------------
 st.markdown("""
     <style>
-        /* NAVBAR BASE */
-        .topnav {
+        .navbar {
             background-color: #004aad;
-            overflow: hidden;
-            padding: 12px 20px;
+            padding: 10px 25px;
             border-radius: 0 0 12px 12px;
-            position: relative;
-            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .topnav-title {
+        .navbar-title {
             color: white;
             font-size: 20px;
             font-weight: 600;
-            margin-left: 10px;
-            display: inline-block;
         }
         .hamburger {
-            font-size: 24px;
-            cursor: pointer;
             color: white;
             background: none;
             border: none;
-            float: right;
+            font-size: 25px;
+            cursor: pointer;
         }
-
-        /* MENU STYLING */
         .menu {
-            display: none;
-            flex-direction: column;
             background-color: #004aad;
-            border-radius: 0 0 10px 10px;
-            animation: slideDown 0.4s ease;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            margin-top: 5px;
+            border-radius: 0 0 12px 12px;
         }
-        .menu a {
+        .menu button {
+            background: none;
+            border: none;
             color: white;
-            padding: 12px 18px;
-            text-decoration: none;
-            font-size: 16px;
             text-align: left;
-            transition: background-color 0.3s ease;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        .menu a:hover {
+        .menu button:hover {
             background-color: #0056d1;
-            border-radius: 6px;
-        }
-
-        /* SLIDE ANIMATION */
-        @keyframes slideDown {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 """, unsafe_allow_html=True)
 
-# -------------------- JAVASCRIPT (TOGGLE MENU) --------------------
-st.markdown("""
-<script>
-function toggleMenu() {
-    var menu = window.document.querySelector('.menu');
-    if (menu.style.display === 'flex') {
-        menu.style.display = 'none';
-    } else {
-        menu.style.display = 'flex';
-        menu.style.animation = 'slideDown 0.4s ease';
-    }
-}
-</script>
-""", unsafe_allow_html=True)
+# -------------------- NAVBAR --------------------
+col1, col2 = st.columns([5, 1])
+with col1:
+    st.markdown("<div class='navbar-title'>Oluyale Ezekiel</div>", unsafe_allow_html=True)
+with col2:
+    if st.button("☰", key="menu_btn", help="Toggle menu", use_container_width=True):
+        st.session_state.menu_open = not st.session_state.menu_open
 
-# -------------------- NAVBAR HTML --------------------
-st.markdown("""
-<div class="topnav">
-    <span class="topnav-title">Oluyale Ezekiel</span>
-    <button class="hamburger" onclick="toggleMenu()">☰</button>
-</div>
-<div class="menu">
-    <a href="?page=Home">🏠 Home</a>
-    <a href="?page=Skills">🧠 Skills</a>
-    <a href="?page=Projects">🚀 Projects</a>
-    <a href="?page=Experience">📚 Experience</a>
-    <a href="?page=Contact">📞 Contact</a>
-</div>
-""", unsafe_allow_html=True)
-
-# -------------------- HELPER: SET/GET PAGE --------------------
-def get_page():
-    """Return the current active page from query parameters."""
-    if "page" in st.query_params:
-        return st.query_params["page"]
-    else:
+# -------------------- MENU --------------------
+if st.session_state.menu_open:
+    st.markdown("<div class='menu'>", unsafe_allow_html=True)
+    if st.button("🏠 Home"):
         st.query_params["page"] = "Home"
-        return "Home"
+        st.session_state.menu_open = False
+    if st.button("🧠 Skills"):
+        st.query_params["page"] = "Skills"
+        st.session_state.menu_open = False
+    if st.button("🚀 Projects"):
+        st.query_params["page"] = "Projects"
+        st.session_state.menu_open = False
+    if st.button("📚 Experience"):
+        st.query_params["page"] = "Experience"
+        st.session_state.menu_open = False
+    if st.button("📞 Contact"):
+        st.query_params["page"] = "Contact"
+        st.session_state.menu_open = False
+    st.markdown("</div>", unsafe_allow_html=True)
 
-page = get_page()
+# -------------------- GET ACTIVE PAGE --------------------
+if "page" not in st.query_params:
+    st.query_params["page"] = "Home"
+page = st.query_params["page"]
 
 # -------------------- HOME PAGE --------------------
 if page == "Home":
@@ -129,27 +112,21 @@ if page == "Home":
     with col1:
         try:
             st.image("assets/profile.png", width=300)
-        except Exception:
-            st.write("⚠️ Add your profile image to `assets/profile.png`")
+        except:
+            st.warning("⚠️ Add your photo in `assets/profile.png`.")
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("NLP & Machine Learning Engineer")
         st.write("""
-            I build intelligent systems that understand and process human language.  
-            My work spans Natural Language Processing (NLP) and Machine Learning — from **Text Summarization** to **Sentiment Analysis**.
+        I build intelligent systems that process and understand human language.  
+        My focus areas are **Natural Language Processing** and **Machine Learning** — from Sentiment Analysis to Text Summarization.
         """)
         if lottie_home:
-            st_lottie(lottie_home, height=250, key="home")
-        st.markdown("""
-        <br>
-        <a href="https://github.com/yourgithub" target="_blank">🔗 GitHub</a> |
-        <a href="https://linkedin.com/in/yourlinkedin" target="_blank">💼 LinkedIn</a> |
-        <a href="assets/resume.pdf" target="_blank">📄 Resume</a>
-        """, unsafe_allow_html=True)
+            st_lottie(lottie_home, height=250)
     st.divider()
-    cols = st.columns(2)
-    cols[0].metric("Projects", "5+")
-    cols[1].metric("Specialization", "NLP & ML")
+    col1, col2 = st.columns(2)
+    col1.metric("Projects", "5+")
+    col2.metric("Specialization", "NLP & ML")
 
 # -------------------- SKILLS PAGE --------------------
 elif page == "Skills":
@@ -157,43 +134,38 @@ elif page == "Skills":
     if lottie_skills:
         st_lottie(lottie_skills, height=200)
     st.write("### Languages")
-    st.progress(90)
     st.text("Python (Advanced)")
     st.write("### Frameworks & Libraries")
-    st.text("Transformers · Scikit-learn · PyTorch · Pandas · NumPy")
+    st.text("Transformers · PyTorch · scikit-learn · NumPy · Pandas")
     st.write("### Tools & Platforms")
-    st.text("Streamlit · Git · Hugging Face · Jupyter")
+    st.text("Streamlit · Hugging Face · Git · Jupyter")
 
 # -------------------- PROJECTS PAGE --------------------
 elif page == "Projects":
     st.header("🚀 Projects")
     if lottie_projects:
         st_lottie(lottie_projects, height=200)
-    project_data = [
+    projects = [
         {
             "title": "Yorùbá Sentiment Analyzer",
-            "desc": "Classifies Yorùbá tweets as positive, negative, or neutral using transformer-based models.",
+            "desc": "Classifies Yorùbá tweets as positive, negative, or neutral using transformer models.",
             "tech": "Python · BERT · NLP",
-            "github": "https://github.com/yourgithub",
         },
         {
             "title": "Text Summarizer",
             "desc": "Abstractive summarization using transformer models fine-tuned on news datasets.",
             "tech": "Python · Hugging Face · Streamlit",
-            "github": "https://github.com/yourgithub",
         },
         {
             "title": "Topic Modeling",
-            "desc": "Automatically discovers hidden themes in documents using LDA and NMF.",
+            "desc": "Discovers hidden themes in documents using LDA and NMF.",
             "tech": "Python · scikit-learn · NLP",
-            "github": "https://github.com/yourgithub",
         },
     ]
-    for p in project_data:
+    for p in projects:
         st.subheader(p["title"])
         st.write(p["desc"])
         st.write(f"**Tech Stack:** {p['tech']}")
-        st.markdown(f"[🔗 View Code]({p['github']})")
         st.divider()
 
 # -------------------- EXPERIENCE PAGE --------------------
@@ -203,13 +175,13 @@ elif page == "Experience":
         st_lottie(lottie_experience, height=200)
     st.write("### 🏢 Elevvo Pathways — NLP Intern")
     st.write("""
-        Worked on Named Entity Recognition, Topic Modeling, and Text Summarization systems.  
-        Applied transformer-based models and preprocessing pipelines to real-world text data.
+    Worked on Named Entity Recognition, Topic Modeling, and Summarization projects  
+    using transformer-based models and preprocessing pipelines.
     """)
     st.write("### 🎓 Federal University of Oye-Ekiti")
     st.write("Bachelor of Engineering (B.Eng) in Computer Engineering")
     st.write("### 🎯 Research Interests")
-    st.write("Multilingual NLP, Transformer optimization, and applied ML.")
+    st.write("Multilingual NLP, Transformer optimization, Applied ML.")
 
 # -------------------- CONTACT PAGE --------------------
 elif page == "Contact":
