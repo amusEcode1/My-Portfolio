@@ -89,16 +89,20 @@ if selected == "About Me":
         st.title("👋 Hi, I'm Ezekiel Oluyale")
         st.subheader("NLP Researcher & Machine Learning Engineer")
 
-        # Add buttons
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown(
-                "[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/oluyale-ezekiel)"
-            )
-        with col2:
-            st.markdown(
-                "[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/amusEcode)"
-            )
+        # Compact LinkedIn + GitHub buttons (same line)
+        st.markdown(
+            """
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="https://www.linkedin.com/in/oluyale-ezekiel" target="_blank">
+                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+                </a>
+                <a href="https://github.com/amusEcode" target="_blank">
+                    <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+                </a>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     else:    
         col1, col2 = st.columns([1, 2])
@@ -108,16 +112,20 @@ if selected == "About Me":
             st.title("👋 Hi, I'm Ezekiel Oluyale")
             st.subheader("NLP Researcher & Machine Learning Engineer")
 
-            # Add buttons for LinkedIn and GitHub
-            col_btn1, col_btn2 = st.columns(2)
-            with col_btn1:
-                st.markdown(
-                    "[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/oluyale-ezekiel)"
-                )
-            with col_btn2:
-                st.markdown(
-                    "[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/amusEcode)"
-                )
+            # Compact LinkedIn + GitHub buttons (same line)
+            st.markdown(
+                """
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <a href="https://www.linkedin.com/in/oluyale-ezekiel" target="_blank">
+                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+                    </a>
+                    <a href="https://github.com/amusEcode" target="_blank">
+                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+                    </a>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
     st.write(
         """
