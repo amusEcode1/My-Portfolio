@@ -241,6 +241,6 @@ elif selected == "Contact":
 # FOOTER
 st.markdown("---")
 st.markdown(
-    "<p style='text-align:center; color:#666;'>© 2025 Oluyale Ezekiel — All rights reserved.</p>",
+    "<p style='text-align:center; color:#666;'>© 2025 Ezekiel Oluyale — All rights reserved.</p>",
     unsafe_allow_html=True
 )
