@@ -201,6 +201,7 @@ elif selected == "Projects":
         st.write(proj["desc"])
         st.caption(f"**Tech Stack & Tools:** {proj['tech']}")
         st.link_button("🌐 View Project", proj["link"])
+         st.markdown("---")
 
 # SKILLS PAGE
 elif selected == "Skills":
