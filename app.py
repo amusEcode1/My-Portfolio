@@ -38,7 +38,7 @@ button {
     border-radius: 10px !important;
 }
 button:hover {
-    background-color: red !important;
+    background-color: #05c !important;
 }
 </style>
 """, unsafe_allow_html=True)
