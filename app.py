@@ -17,7 +17,6 @@ def load_lottie(url):
         return None
     return r.json()
 
-nlp_anim = load_lottie("animation.json")
 contact_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_t24tpvcu.json")
 
 # ---------- CUSTOM CSS ----------
@@ -96,7 +95,6 @@ if selected == "About Me":
             """
         )
     st.markdown("---")
-    st_lottie(nlp_anim, height=250, key="nlp")
 
 # PROJECTS PAGE
 elif selected == "Projects":
