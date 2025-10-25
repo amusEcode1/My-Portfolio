@@ -141,9 +141,12 @@ if selected == "About Me":
         """
         I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
         smarter and more accessible.  
+        
         My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
         **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, and **Resume Screening**.
+        
         I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed a strong interest in **Natural Language Processing**. 
+        
         I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing** and **Transformer-Based Models**
         to build smarter AI systems.
         """
