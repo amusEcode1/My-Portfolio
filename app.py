@@ -155,7 +155,7 @@ elif selected == "Projects":
         {
             "title": "Text Summarization",
             "desc": "An Abstractive and Extractive summarization app that generates concise summaries from long articles using pre-trained transformer model (T5) fine-tuned on the CNN/DailyMail Dataset.",
-            "Tech Stack & Tools": "Python, NLTK, spaCy, BeautifulSoup4, pytextrank, Datasets, rouge-score, Transformers, Streamlit",
+            "tech": "Python, NLTK, spaCy, BeautifulSoup4, pytextrank, Datasets, rouge-score, Transformers, Streamlit",
             "link": "https://concise-ai.streamlit.app"
         },
         {
@@ -175,7 +175,7 @@ elif selected == "Projects":
     for proj in project_data:
         st.subheader(proj["title"])
         st.write(proj["desc"])
-        st.caption(f"**Tech Used:** {proj['tech']}")
+        st.caption(f"**Tech Used:** {proj['Tech Stack & Tools']}")
         st.link_button("🔗 View Project", proj["link"])
         st.markdown("---")
 
