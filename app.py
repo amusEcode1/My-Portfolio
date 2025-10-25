@@ -17,7 +17,7 @@ def load_lottie(url):
         return None
     return r.json()
 
-nlp_anim = load_lottie("https://lottiefiles.com/marketplace/machine-learning-36")
+nlp_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_dwtZtd.json")
 contact_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_t24tpvcu.json")
 
 # ---------- CUSTOM CSS ----------
