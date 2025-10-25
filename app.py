@@ -30,6 +30,7 @@ h1, h2, h3, h4 {
 }
 img {
     border-radius: 20px;
+    width: 20px;
 }
 button {
     background-color: #003366 !important;
