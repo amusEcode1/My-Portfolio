@@ -116,7 +116,7 @@ change_page()
 if st.session_state.page == "Home":
     col1, col2 = st.columns([1, 1])
     with col1:
-        st.image("assets/profile.png", width=300)
+        st.image("profile.jpg", width=300)
     with col2:
         st.title("👋 Hi, I'm Oluyale Ezekiel")
         st.subheader("NLP & Machine Learning Engineer")
@@ -128,7 +128,7 @@ if st.session_state.page == "Home":
         <br>
         <a href="https://github.com/yourgithub" target="_blank">🔗 GitHub</a> |
         <a href="https://linkedin.com/in/yourlinkedin" target="_blank">💼 LinkedIn</a> |
-        <a href="assets/resume.pdf" target="_blank">📄 Resume</a>
+        <a href="Ezekiel_Oluyale_Resume.pdf" target="_blank">📄 Resume</a>
         """, unsafe_allow_html=True)
     st.divider()
     st.metric("Projects", "5+")
@@ -205,6 +205,6 @@ elif st.session_state.page == "Contact":
 st.markdown("""
 <hr style='margin-top:50px;'>
 <center>
-    <small>© 2025 Oluyale Ezekiel — NLP & Machine Learning Portfolio</small>
+    <small>© 2025 Ezekiel Oluyale — NLP & Machine Learning Portfolio</small>
 </center>
 """, unsafe_allow_html=True)
