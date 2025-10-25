@@ -76,25 +76,33 @@ else:
 
 # ABOUT ME PAGE
 if selected == "About Me":
-    col1, col2 = st.columns([1, 2])
-    with col1:
-        st.image("profile.jpg", width=150)
-    with col2:
+    # Check if screen width is small (simulate using Streamlit's theme)
+    is_mobile = st.session_state.get("is_mobile", False)
+
+    if is_mobile:
+        st.image("profile.jpg", width=200)
         st.title("👋 Hi, I'm Ezekiel Oluyale")
         st.subheader("NLP Researcher & Machine Learning Engineer")
-        st.write(
-            """
-            I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
-            smarter and more accessible.  
+    else:    
+        col1, col2 = st.columns([1, 2])
+        with col1:
+            st.image("profile.jpg", width=200)
+        with col2:
+            st.title("👋 Hi, I'm Ezekiel Oluyale")
+            st.subheader("NLP Researcher & Machine Learning Engineer")
+    st.write(
+        """
+        I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
+        smarter and more accessible.  
             
-            My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
-            **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, and **Resume Screening**.
+        My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like **Sentiment Analysis**, 
+        **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, and **Resume Screening**.
 
-            I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed a strong interest in **Natural Language Processing**.
+        I hold a Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed a strong interest in **Natural Language Processing**.
             
-            I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing** and **Transformer-Based Models**
-            to build smarter AI systems.
-            """
+        I enjoy transforming raw data into meaningful insights and currently exploring **Multilingual AI**, **Speech-Processing** and **Transformer-Based Models**
+        to build smarter AI systems.
+        """
         )
 
 # PROJECTS PAGE
