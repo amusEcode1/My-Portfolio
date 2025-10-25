@@ -167,7 +167,7 @@ elif selected == "Contact":
         st_lottie(contact_anim, height=250, key="contact")
     with col2:
         st.markdown("""
-        <form action="https://formsubmit.co/oluyale.ezekiel@example.com" method="POST">
+        <form action="https://formsubmit.co/ezekieloluyale@gmail.com" method="POST">
             <input type="text" name="name" placeholder="Your Name" required><br><br>
             <input type="email" name="email" placeholder="Your Email" required><br><br>
             <textarea name="message" placeholder="Your Message" required></textarea><br><br>
@@ -176,9 +176,9 @@ elif selected == "Contact":
         """, unsafe_allow_html=True)
     st.markdown("---")
     st.write("📞 **Phone:** +234 812 345 6789")
-    st.write("📧 **Email:** [oluyale.ezekiel@example.com](mailto:oluyale.ezekiel@example.com)")
-    st.write("🔗 **LinkedIn:** [linkedin.com/in/oluyaleezekiel](https://www.linkedin.com/in/ezekiel-oluyale)")
-    st.write("🐙 **GitHub:** [github.com/amusEcode](https://github.com/amusEcode1)")
+    st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
+    st.write("🔗 **LinkedIn:** [Ezekiel Oluyale](https://www.linkedin.com/in/ezekiel-oluyale)")
+    st.write("🐙 **GitHub:** [@amusEcode1](https://github.com/amusEcode1)")
 
 # FOOTER
 st.markdown("---")
