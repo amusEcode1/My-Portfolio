@@ -82,13 +82,24 @@ else:
 
 # ABOUT ME PAGE
 if selected == "About Me":
-    # Check if screen width is small (simulate using Streamlit's theme)
     is_mobile = st.session_state.get("is_mobile", False)
 
     if is_mobile:
         st.image("profile.jpg", width=200)
         st.title("👋 Hi, I'm Ezekiel Oluyale")
         st.subheader("NLP Researcher & Machine Learning Engineer")
+
+        # Add buttons
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(
+                "[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/oluyale-ezekiel)"
+            )
+        with col2:
+            st.markdown(
+                "[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/amusEcode)"
+            )
+
     else:    
         col1, col2 = st.columns([1, 2])
         with col1:
@@ -96,6 +107,18 @@ if selected == "About Me":
         with col2:
             st.title("👋 Hi, I'm Ezekiel Oluyale")
             st.subheader("NLP Researcher & Machine Learning Engineer")
+
+            # Add buttons for LinkedIn and GitHub
+            col_btn1, col_btn2 = st.columns(2)
+            with col_btn1:
+                st.markdown(
+                    "[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/oluyale-ezekiel)"
+                )
+            with col_btn2:
+                st.markdown(
+                    "[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/amusEcode)"
+                )
+
     st.write(
         """
         I'm a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
