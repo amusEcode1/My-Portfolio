@@ -119,7 +119,7 @@ if selected == "About Me":
                 """
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/ezekiel-oluyale" target="_blank">
-                        <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="35" height="35" style="border-radius: 5px;">
                     </a>
                     <a href="https://github.com/amusEcode1" target="_blank">
                         <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
