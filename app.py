@@ -122,7 +122,7 @@ if selected == "About Me":
                         <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="35" height="35" style="border-radius: 5px;">
                     </a>
                     <a href="https://github.com/amusEcode1" target="_blank">
-                        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" width="35" height="35" style="border-radius: 5px;">  
+                        <img src="https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">  
                     </a>
                 </div>
                 """,
