@@ -112,7 +112,7 @@ if selected == "About Me":
                 """
                 <div style="display: flex; justify-content: center;">
                     <img src="profile.jpg" 
-                         style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 3px solid #ddd;" alt="000">
+                         style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 3px solid #ddd;" alt="000000">
                 </div>
                 """,
                 unsafe_allow_html=True
