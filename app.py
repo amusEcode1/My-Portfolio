@@ -225,13 +225,13 @@ elif selected == "Contact":
         """
         <div style='display: flex; flex-direction: column; gap: 10px; margin-top: 10px;'>
             <div style='display: flex; align-items: center; gap: 10px;'>
-                <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' width='25'>
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width='25'>
                 <a href='https://www.linkedin.com/in/ezekiel-oluyale' target='_blank''>
                     LinkedIn: Ezekiel Oluyale
                 </a>
             </div>
             <div style='display: flex; align-items: center; gap: 10px;'>
-                <img src='https://cdn-icons-png.flaticon.com/512/733/733553.png' width='25'>
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" width='25'>
                 <a href='https://github.com/amusEcode1' target='_blank'>
                     GitHub: @amusEcode1
                 </a>
