@@ -221,6 +221,8 @@ elif selected == "Contact":
     # Socials with logos + names
     st.markdown(
         """
+        <div>📞 <b>Phone:</b> +234 812 345 6789</div>
+        <div>📧 <b>Email:</b> <a href='mailto:ezekieloluyale@gmail.com'>ezekieloluyale@gmail.com</a></div>
         <div style='display: flex; flex-direction: column; gap: 10px; margin-top: 10px;'>
             <div style='display: flex; align-items: center; gap: 10px;'>
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn", width=25, heigt=25>
@@ -234,8 +236,7 @@ elif selected == "Contact":
         """,
         unsafe_allow_html=True
     )
-    st.write("📞 **Phone:** +234 812 345 6789")
-    st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
+    
 # FOOTER
 st.markdown("---")
 st.markdown(
