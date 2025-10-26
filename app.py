@@ -112,7 +112,7 @@ if selected == "About Me":
                 """
                 <div style="display: flex; justify-content: center;">
                     <img src="https://raw.githubusercontent.com/amusEcode1/My-Portfolio/main/profile.jpg" 
-                         style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 3px solid #ddd;" alt="Ezekiel Oluyale">
+                         style="width: 250px; height: 250px; object-fit: cover; border-radius: 50%; border: 3px solid #ddd;" alt="Ezekiel Oluyale">
                 </div>
                 """,
                 unsafe_allow_html=True
