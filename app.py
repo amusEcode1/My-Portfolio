@@ -225,11 +225,11 @@ elif selected == "Contact":
             <div>📲  <b>Phone:</b> +234 812 345 6789</div>
             <div>📧  <b>Email:</b> <a href='mailto:ezekieloluyale@gmail.com'>ezekieloluyale@gmail.com</a></div>
             <div style='display: flex; align-items: center; gap: 10px;'>
-                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn", width=15>
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn", width=20>
                 <span><b>LinkedIn:</b> <a href='https://www.linkedin.com/in/ezekiel-oluyale' target='_blank'>Ezekiel Oluyale</a></span>
             </div>
             <div style='display: flex; align-items: center; gap: 10px;'>
-                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub", width=15>
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub", width=20>
                 <span><b>GitHub:</b> <a href='https://github.com/amusEcode1' target='_blank'>@amusEcode1</a></span>
             </div>
         </div>
