@@ -217,8 +217,6 @@ elif selected == "Contact":
         </form>
         """, unsafe_allow_html=True)
     st.markdown("---")
-    st.write("📞 **Phone:** +234 812 345 6789")
-    st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
     
     # Socials with logos + names
     st.markdown(
@@ -236,6 +234,8 @@ elif selected == "Contact":
         """,
         unsafe_allow_html=True
     )
+    st.write("📞 **Phone:** +234 812 345 6789")
+    st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
 # FOOTER
 st.markdown("---")
 st.markdown(
