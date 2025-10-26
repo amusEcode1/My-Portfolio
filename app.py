@@ -108,7 +108,15 @@ if selected == "About Me":
         col1, col2 = st.columns([1, 2], gap="medium")
 
         with col1:
-            st.image("profile.jpg", width=200, use_container_width=True)
+            st.markdown(
+                """
+                <div style="display: flex; justify-content: center;">
+                    <img src="profile.jpg" alt="Profile" 
+                         style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 3px solid #ddd;">
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
         with col2:
             st.title("Ezekiel Oluyale")
