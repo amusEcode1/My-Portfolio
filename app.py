@@ -111,7 +111,7 @@ if selected == "About Me":
             st.image("profile.jpg", width=220, use_container_width=True)
 
         with col2:
-            st.title("👋 Hi, I'm Ezekiel Oluyale")
+            st.title("Ezekiel Oluyale")
             st.subheader("NLP Researcher & Machine Learning Engineer")
 
             # Social buttons
