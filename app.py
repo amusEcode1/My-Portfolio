@@ -108,7 +108,7 @@ if selected == "About Me":
         col1, col2 = st.columns([1, 2], gap="large")
 
         with col1:
-            st.image("profile.jpg", width=220, use_container_width=True)
+            st.image("profile.jpg", width=200, use_container_width=True)
 
         with col2:
             st.title("Ezekiel Oluyale")
