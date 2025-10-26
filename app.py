@@ -105,7 +105,7 @@ if selected == "About Me":
         )
 
         # Use adaptive columns
-        col1, col2 = st.columns([1, 2])
+        col1, col2 = st.columns([1, 2], gap="medium")
 
         with col1:
             st.image("profile.jpg", width=200, use_container_width=True)
