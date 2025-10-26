@@ -49,7 +49,7 @@ button:hover {
 """, unsafe_allow_html=True)
 
 # SIDEBAR NAVIGATION 
-st.sidebar.image("logo.png", width=120)
+st.sidebar.image("profile.jp", width=120, alt="profile")
 st.sidebar.title("Ezekiel Oluyale")
 st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer**")
 
