@@ -3,14 +3,14 @@ from streamlit_lottie import st_lottie
 import requests
 import os
 
-# ---------- PAGE CONFIG ----------
+# PAGE CONFIG 
 st.set_page_config(
     page_title="Ezekiel Oluyale Portfolio",
     page_icon="logo.png",
     layout="wide"
 )
 
-# ---------- LOAD ANIMATIONS ----------
+# LOAD ANIMATIONS 
 def load_lottie(url):
     r = requests.get(url)
     if r.status_code != 200:
@@ -19,7 +19,7 @@ def load_lottie(url):
 
 contact_anim = load_lottie("https://assets9.lottiefiles.com/packages/lf20_t24tpvcu.json")
 
-# ---------- CUSTOM CSS ----------
+# CUSTOM CSS 
 st.markdown("""
 <style>
 
@@ -48,7 +48,7 @@ button:hover {
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- SIDEBAR NAVIGATION ----------
+# SIDEBAR NAVIGATION 
 st.sidebar.image("logo.png", width=120)
 st.sidebar.title("Ezekiel Oluyale")
 st.sidebar.markdown("**NLP Researcher & Machine Learning Engineer**")
@@ -76,7 +76,7 @@ else:
 
 import streamlit as st
 
-# --- ABOUT ME PAGE ---
+# ABOUT ME PAGE 
 if selected == "About Me":
     # Main container
     with st.container():
@@ -222,7 +222,7 @@ elif selected == "Contact":
     st.markdown(
         """
         <div style='display: flex; flex-direction: column; gap: 10px; margin-top: 10px;'>
-            <div>📲&nbsp;&nbsp;&nbsp;<b>Phone:</b> +234 812 345 6789</div>
+            <div>📲&nbsp;&nbsp;&nbsp;<b>Phone:</b> (+234) 814 829 9173</div>
             <div>📧&nbsp;&nbsp;&nbsp;<b>Email:</b> <a href='mailto:ezekieloluyale@gmail.com'>ezekieloluyale@gmail.com</a></div>
             <div style='display: flex; align-items: center; gap: 10px;'>
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn", width=20>
