@@ -220,16 +220,22 @@ elif selected == "Contact":
     st.write("📞 **Phone:** +234 812 345 6789")
     st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
     
-    # Socials with logos
+    # Socials with logos + names
     st.markdown(
         """
-        <div style='display: flex; align-items: center; gap: 15px; margin-top: 10px;'>
-            <a href='https://www.linkedin.com/in/ezekiel-oluyale' target='_blank'>
-                <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' width='30' title='LinkedIn'>
-            </a>
-            <a href='https://github.com/amusEcode1' target='_blank'>
-                <img src='https://cdn-icons-png.flaticon.com/512/733/733553.png' width='30' title='GitHub'>
-            </a>
+        <div style='display: flex; flex-direction: column; gap: 10px; margin-top: 10px;'>
+            <div style='display: flex; align-items: center; gap: 10px;'>
+                <img src='https://cdn-icons-png.flaticon.com/512/174/174857.png' width='25'>
+                <a href='https://www.linkedin.com/in/ezekiel-oluyale' target='_blank' style='text-decoration: none; color: #0077B5; font-weight: bold;'>
+                    LinkedIn: Ezekiel Oluyale
+                </a>
+            </div>
+            <div style='display: flex; align-items: center; gap: 10px;'>
+                <img src='https://cdn-icons-png.flaticon.com/512/733/733553.png' width='25'>
+                <a href='https://github.com/amusEcode1' target='_blank' style='text-decoration: none; color: #000000; font-weight: bold;'>
+                    GitHub: @amusEcode1
+                </a>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
