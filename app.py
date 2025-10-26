@@ -219,8 +219,11 @@ elif selected == "Contact":
     st.markdown("---")
     st.write("📞 **Phone:** +234 812 345 6789")
     st.write("📧 **Email:** [ezekieloluyale@gmail.com](mailto:ezekieloluyale@gmail.com)")
+    st.markdown("""
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" width="35" height="35" style="border-radius: 5px;">
     st.write("🔗 **LinkedIn:** [Ezekiel Oluyale](https://www.linkedin.com/in/ezekiel-oluyale)")
     st.write("🔗 **GitHub:** [@amusEcode1](https://github.com/amusEcode1)")
+    """, unsave_allow_html=True)
 
 # FOOTER
 st.markdown("---")
