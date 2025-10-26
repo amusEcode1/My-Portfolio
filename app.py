@@ -218,8 +218,6 @@ elif selected == "Contact":
     with col2:
         st.markdown("""
         <form action="https://formsubmit.co/ezekieloluyale@gmail.com" method="POST">
-            <!-- Redirect after submission -->
-            <input type="hidden" name="_next" value="https://ezekiel-oluyale-portfolio.streamlit.app">
             <input type="text" name="name" placeholder="Your Name" required><br><br>
             <input type="email" name="email" placeholder="Your Email" required><br><br>
             <textarea name="message" placeholder="Your Message" required></textarea><br><br>
