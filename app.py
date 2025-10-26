@@ -203,7 +203,7 @@ elif selected == "Projects":
 
 # CONTACT PAGE
 elif selected == "Contact":
-    st.header("📬 Get In Touch")
+    st.header("📩 Get In Touch")
     col1, col2 = st.columns([1, 1])
     with col1:
         st_lottie(contact_anim, height=250, key="contact")
