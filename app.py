@@ -223,7 +223,7 @@ elif selected == "Contact":
         """
         <div style='display: flex; flex-direction: column; gap: 10px; margin-top: 10px;'>
             <div>📲&nbsp;&nbsp;&nbsp;<b>Phone:</b> +234 812 345 6789</div>
-            <div>📧&nbsp;<b>Email:</b> <a href='mailto:ezekieloluyale@gmail.com'>ezekieloluyale@gmail.com</a></div>
+            <div>📧&nbsp;&nbsp;&nbsp;<b>Email:</b> <a href='mailto:ezekieloluyale@gmail.com'>ezekieloluyale@gmail.com</a></div>
             <div style='display: flex; align-items: center; gap: 10px;'>
                 <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn", width=20>
                 <span><b>LinkedIn:</b> <a href='https://www.linkedin.com/in/ezekiel-oluyale' target='_blank'>Ezekiel Oluyale</a></span>
