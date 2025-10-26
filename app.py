@@ -111,7 +111,7 @@ if selected == "About Me":
             st.markdown(
                 """
                 <div style="display: flex; justify-content: center;">
-                    <img src="profile.jpg" alt="Profile" 
+                    <img src="profile.jpg" 
                          style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; border: 3px solid #ddd;">
                 </div>
                 """,
