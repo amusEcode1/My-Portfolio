@@ -217,7 +217,7 @@ elif selected == "Contact":
         st_lottie(contact_anim, height=250, key="contact")
     with col2:
         st.markdown("""
-        <form action="https://formsubmit.co/ezekieloluyale@gmail.com" method="POST">
+        <form action="https://formspree.io/f/mblpdjll" method="POST" target="_blank">
             <input type="text" name="name" placeholder="Your Name" required><br><br>
             <input type="email" name="email" placeholder="Your Email" required><br><br>
             <textarea name="message" placeholder="Your Message" required></textarea><br><br>
