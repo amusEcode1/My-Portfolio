@@ -161,19 +161,19 @@ elif selected == "Projects":
          {
             "title": "Product Review — Sentiment Analysis",
             "desc": "A Sentiment Analysis System using the IMDb reviews dataset to classify product reviews as positive or negative.",
-            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, NLTK, Scikit-learn, Streamlt, Colab",
+            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, NLTK, Scikit-learn, Streamlit, Colab",
             "link": "https://reviewpredictor.streamlit.app/"
         },
          {
             "title": "Fake News Detection System",
             "desc": "A Fake News Detection System using the Fake and Real News dataset designed to detect fake news by classifying news articles as real or fake.",
-            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, spaCy, Scikit-learn, Streamlt, Colab",
+            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, spaCy, Scikit-learn, Streamlit, Colab",
             "link": "https://news-verifier.streamlit.app/"
         },
          {
             "title": "Named Entity Recognition",
             "desc": "A Named Entity Recognition (NER) System for News Articles using the CoNLL003 dataset to automatically extract and categorize entities like people, locations, organizations, et.c from real-world text.",
-            "tech": "Python, Pandas, spaCy, Streamlt, Colab",
+            "tech": "Python, Pandas, spaCy, Streamlit, Colab",
             "link": "https://named-entity-extraction-news.streamlit.app/"
         },
          {
