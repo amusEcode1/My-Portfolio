@@ -240,6 +240,10 @@ elif selected == "Contact":
                 <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub", width=20>
                 <span><b>GitHub:</b> <a href='https://github.com/amusEcode1' target='_blank'>@amusEcode1</a></span>
             </div>
+            <div style='display: flex; align-items: center; gap: 10px;'>
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111644.png" alt="Kaggle" width=20>
+                <span><b>Kaggle:</b> <a href='https://www.kaggle.com/ezekieloluyale' target='_blank'>@ezekieloluyale</a></span>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
