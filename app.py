@@ -241,7 +241,7 @@ elif selected == "Contact":
                 <span><b>GitHub:</b> <a href='https://github.com/amusEcode1' target='_blank'>@amusEcode1</a></span>
             </div>
             <div style='display: flex; align-items: center; gap: 10px;'>
-                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Kaggle" width="20">
+                <img src="https://img.icons8.com/?size=100&id=Omk4fWoSmCHm&format=png&color=000000" alt="Kaggle" width="20">
                 <span><b>Kaggle:</b> <a href='https://www.kaggle.com/ezekieloluyale' target='_blank'>@ezekieloluyale</a></span>
             </div>
         </div>
