@@ -68,7 +68,7 @@ if os.path.exists(cv_path):
         st.sidebar.download_button(
             label="📄 Download CV",
             data=pdf_file.read(),
-            file_name="Ezekiel_Oluyale_Resume.pdf",
+            file_name="Ezekiel Oluyale Resume.pdf",
             mime="application/pdf",
         )
 else:
@@ -142,7 +142,7 @@ if selected == "About Me":
                 I am a passionate developer focused on building **intelligent NLP applications** that make human–language interaction
                 smarter and more accessible.  
                 
-                My journey began with curiosity about how machines understand text — and over time, I’ve worked on projects like 
+                My journey began with curiosity about how machines understand text and over time, I’ve worked on projects like 
                 **Sentiment Analysis**, **Named Entity Recognition**, **Topic Modelling**, **Question Answering**, **Text Summarization**, 
                 and **Resume Screening**.
 
@@ -159,7 +159,13 @@ elif selected == "Projects":
     st.header("🚀 Featured NLP Projects")
     project_data = [
          {
-            "title": "Product Review — Sentiment Analysis",
+            "title": "Email Classification & Malicious URL Detection System",
+            "desc": "An Email Classification & Malicious URL Detection System to filter out malicious activities, and curb risks of financial thefts",
+            "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, spaCy, WordCloud, BeautifulSoup, Counter, tldextract, urlparse, Scikit-learn, Streamlit, Colab",
+            "link": "https://ai-phishing-detector.streamlit.app/"
+        },
+         {
+            "title": "Product Review - Sentiment Analysis",
             "desc": "A Sentiment Analysis System using the IMDb reviews dataset to classify product reviews as positive or negative.",
             "tech": "Python, NumPy, Pandas, Matplotlib, Seaborn, WordCloud, BeautifulSoup, NLTK, Scikit-learn, Streamlit, Colab",
             "link": "https://reviewpredictor.streamlit.app/"
