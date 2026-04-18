@@ -149,7 +149,7 @@ if selected == "About Me":
                 I hold a First-Class Bachelor’s degree in **Computer Engineering** from the **Federal University of Oye-Ekiti**, Nigeria, where I developed 
                 a strong interest in **Natural Language Processing**.
                 
-                I enjoy transforming raw data into meaningful insights, and currently, I am exploring Multilingual AI, speech-processing, and transformer-based models
+                I enjoy transforming raw data into meaningful insights, and currently, I am exploring GenAI, Multilingual AI, speech-processing, and transformer-based models
                 for underrepresented languages (mostly African languages), to build smarter and more inclusive AI systems. 
                 """
             )
