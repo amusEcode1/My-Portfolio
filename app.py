@@ -68,7 +68,7 @@ if os.path.exists(cv_path):
         st.sidebar.download_button(
             label="📄 Download CV",
             data=pdf_file.read(),
-            file_name="Ezekiel Oluyale Resume.pdf",
+            file_name="Ezekiel_Oluyale_Resume.pdf",
             mime="application/pdf",
         )
 else:
